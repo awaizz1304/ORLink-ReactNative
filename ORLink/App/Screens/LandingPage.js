@@ -6,7 +6,7 @@ import Swiper from 'react-native-swiper';
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
-export default class FirstLaunchScreen extends Component {
+export default class LandingPage extends Component {
     render(){
         return(
         <View style = {styles.swiperContainer}>

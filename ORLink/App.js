@@ -10,12 +10,13 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { connect } from 'react-redux';
 import ClientLayer from './App/Components/Layers/ClientLayer'
+import LandingPage from './App/Screens/LandingPage';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      firstTimeLaunch = false
+      firstTimeLaunch : false
     }
   }
   componentDidMount(){
@@ -30,7 +31,7 @@ class App extends Component {
   render() {
     firstLaunch = this.state.firstTimeLaunch;
     return (
-
+       <LandingPage/>
     )
   }
 }

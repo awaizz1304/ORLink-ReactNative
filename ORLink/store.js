@@ -1,11 +1,13 @@
-import {createStore,combineReducers } from 'redux'
+import {createStore as _createStore,combineReducers,applyMiddleware } from 'redux'
+import { reducers,actions } from './App/Components/Store/module'
+export { States } from './App/Components/Store/module'
+import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({
-    
-});
+const middlewear = applyMiddleware(thunk)
 
-const configureStore = () => {
-    return createStore(() => {})
+
+const createStore = (data : Object = {}) => {
+    return _createStore(combineReducers(reducers),data,middlewear)
 }
 
-export default configureStore
+export {createStore,actions}

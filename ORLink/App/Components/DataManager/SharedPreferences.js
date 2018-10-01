@@ -9,12 +9,16 @@ class SharedPrefences {
             }
         )
     }
-    GetValueForKey(key){
+    GetValueForKey(key,valueResponse){
         DefaultPreference.get(key).then(
             function(value){
                 str = value + " for " + key + " Retrived ";
                 console.log(str)
-                return value;
+                if(value == undefined || value == ""){
+                    value = null;
+                }
+                valueResponse(value);
+                
             }
         )
     }
