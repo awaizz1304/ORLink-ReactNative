@@ -14,6 +14,7 @@ import LandingPage from './App/Screens/LandingPage';
 
 // Dummy Renders
 import { Login } from './App/Screens/Login'
+import { Signup } from './App/Screens/Signup'
 
 class App extends Component {
   constructor(props){
@@ -34,7 +35,8 @@ class App extends Component {
   render() {
     firstLaunch = this.state.firstTimeLaunch;
     return (
-      <Login/>
+      // <Login/>
+      <Signup/>
       // <LandingPage/>
     )
   }

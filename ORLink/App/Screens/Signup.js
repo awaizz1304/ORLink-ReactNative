@@ -14,7 +14,7 @@ import { Checkbox } from '../UIComponents/Checkbox'
 import { WScale,HScale } from '../Modules/MultiResolution'
 
 // Creating Stateless Component.
-const Login = () => {
+const Signup = () => {
     return (
         // Main layout container
         <View style={{
@@ -193,4 +193,4 @@ const Login = () => {
 };
 
 // Exporting Component.
-module.exports = {Login}
+module.exports = {Signup}
