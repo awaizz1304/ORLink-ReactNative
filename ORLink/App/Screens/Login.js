@@ -7,7 +7,7 @@ import React , {Component} from 'react'
 import {Text, View} from 'react-native'
 
 // Third Parties Dependencies.
-import { TextField } from 'react-native-material-textfield'
+import  Textinput  from 'react-native-material-textinput'
 
 // Custom Components
 import { Checkbox } from '../UIComponents/Checkbox'
@@ -62,10 +62,17 @@ const Login = () => {
                     {/* Username Field */}
                     <View style={{width:'85%'}}>
                         
-                        <TextField
+                        <Textinput
                             label='Username'
-                            labelFontSize={WScale(12)}
-                            fontSize={WScale(16)}
+                            labelColor="#a6a6a6"
+                            labelActiveColor="#a6a6a6"
+                            labelActiveScale={WScale(0.8)}
+                            underlineColor="#d3dfef"
+                            underlineActiveColor="#00a0e3"
+                            fontSize={WScale(12)}
+                            labelActiveTop={-30}
+                            color="#4a4a4a"
+                            marginBottom={WScale(20)}
                         />
 
                     </View>
@@ -73,10 +80,16 @@ const Login = () => {
                     {/* Password Field */}
                     <View style={{width:'85%'}}>
                         
-                        <TextField
+                        <Textinput
                             label='Password'
-                            labelFontSize={WScale(12)}
-                            fontSize={WScale(16)}
+                            labelColor="#a6a6a6"
+                            labelActiveColor="#a6a6a6"
+                            labelActiveScale={WScale(0.8)}
+                            underlineColor="#d3dfef"
+                            underlineActiveColor="#00a0e3"
+                            fontSize={WScale(12)}
+                            labelActiveTop={-30}
+                            color="#4a4a4a"
                         />
 
                     </View>
