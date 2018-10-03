@@ -4,11 +4,14 @@
 
 // Fetching dependencies.
 import React , {Component} from 'react'
-import {Platform, StyleSheet, Text, View,Dimensions,Button} from 'react-native'
+import {Text, View} from 'react-native'
 
 // Third Parties Dependencies.
 import { TextField } from 'react-native-material-textfield'
-import { Checkbox } from '../UIComponents/Checkbox' // Custom Checkbox Component.
+
+// Custom Components
+import { Checkbox } from '../UIComponents/Checkbox'
+import { WScale,HScale } from '../Modules/MultiResolution'
 
 // Creating Stateless Component.
 const Login = () => {
@@ -36,12 +39,12 @@ const Login = () => {
                     <View style={{flex:0.35,flexDirection:"row"}}/>
 
                     {/* Heading */}
-                    <Text style={{fontSize:40,fontWeight:'bold',textAlign:'center'}}>
+                    <Text style={{fontSize:WScale(40),fontWeight:'bold',textAlign:'center'}}>
                         ORLINK
                     </Text>
                     
                     {/* Description */}
-                    <Text style={{fontSize:20,fontWeight:'300',textAlign:'center'}}>
+                    <Text style={{fontSize:WScale(20),fontWeight:'300',textAlign:'center'}}>
                         An intuitive surgical{"\n"}
                         workflow platform
                     </Text>
@@ -61,6 +64,8 @@ const Login = () => {
                         
                         <TextField
                             label='Username'
+                            labelFontSize={WScale(12)}
+                            fontSize={WScale(16)}
                         />
 
                     </View>
@@ -70,6 +75,8 @@ const Login = () => {
                         
                         <TextField
                             label='Password'
+                            labelFontSize={WScale(12)}
+                            fontSize={WScale(16)}
                         />
 
                     </View>
@@ -88,15 +95,17 @@ const Login = () => {
                             {{
                                 flexDirection:"row",
                                 justifyContent:"space-between",
-                                paddingTop:10,
-                                paddingBottom:30
+                                paddingTop:WScale(16.5),
+                                paddingBottom:WScale(36)
                             }}
                         >
                         
                             {/* Remember Me Checkbox */}
                             <Checkbox
                                 marked = {true}
-                                iconSize = {18}
+                                iconSize = {WScale(18)}
+                                fontSize = {WScale(12)}
+                                interPadding = { WScale(6.1) }
                                 iconColor = "#b3bfd0"
                                 message = "Remember me"
                                 messageColor="#a6a6a6"
@@ -107,7 +116,8 @@ const Login = () => {
                                 style=
                                 {{
                                     color: "#4a90e2",
-                                    textAlignVertical:"center"
+                                    textAlignVertical:"center",
+                                    fontSize:WScale(12)
                                 }}
                             >
                                 Forgot password?
@@ -123,7 +133,7 @@ const Login = () => {
                     <View style=
                     {{
                         width:'85%',
-                        height:50,
+                        height:WScale(45),
                         backgroundColor:"#4a90e2",
                         borderRadius: 6,
                         shadowColor: "#00000019.8",
@@ -137,7 +147,7 @@ const Login = () => {
                     }}>
 
                         {/* Text Component */}
-                        <Text style={{flex:1,textAlign:"center",textAlignVertical:"center",fontSize:15,fontWeight:'900',color:'white'}}>
+                        <Text style={{flex:1,textAlign:"center",textAlignVertical:"center",fontSize:WScale(15),fontWeight:'900',color:'white'}}>
                             LOGIN
                         </Text>
 
@@ -153,12 +163,12 @@ const Login = () => {
                         }}
                     >
 
-                        <View style={{paddingTop:44,flexDirection:"row"}}>
-                            <Text style={{color:"#4a4a4a",fontFamily: "Avenir"}}>New user? </Text>
-                            <Text style={{color:"#4a90e2"}}>Sign Up</Text>
+                        <View style={{paddingTop:WScale(44),flexDirection:"row"}}>
+                            <Text style={{color:"#4a4a4a",fontSize:WScale(14)}}>New user? </Text>
+                            <Text style={{color:"#4a90e2",fontSize:WScale(14)}}>Sign Up</Text>
                         </View>
 
-                        <Text style={{color: "#a6a6a6",paddingBottom:18}}>Terms & Condition</Text>
+                        <Text style={{color: "#a6a6a6",paddingBottom:WScale(18),fontSize:WScale(12)}}>Terms & Condition</Text>
 
                     </View>
 

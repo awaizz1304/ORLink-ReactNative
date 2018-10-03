@@ -19,13 +19,13 @@ const Checkbox = (props) => {
     let selectedIcon = props.marked ? "circle-o" : "circle"
 
     return (
-        <View style={{flexDirection:"row",justifyContent:"space-between",width:"33%"}}>
+        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
             
             <Text style={{color:props.messageColor}}>
                 <Icon name={selectedIcon} size={props.iconSize} color={props.iconColor} />
             </Text>
 
-            <Text style={{color:props.messageColor}}>
+            <Text style={{color:props.messageColor,fontSize:props.fontSize,paddingLeft:props.interPadding}}>
                 {props.message}
             </Text>
         </View>
