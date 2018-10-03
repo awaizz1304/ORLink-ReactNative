@@ -12,6 +12,9 @@ import { connect } from 'react-redux';
 import ClientLayer from './App/Components/Layers/ClientLayer'
 import LandingPage from './App/Screens/LandingPage';
 
+// Dummy Renders
+import { Login } from './App/Screens/Login'
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -31,7 +34,8 @@ class App extends Component {
   render() {
     firstLaunch = this.state.firstTimeLaunch;
     return (
-       <LandingPage/>
+      <Login/>
+      // <LandingPage/>
     )
   }
 }
