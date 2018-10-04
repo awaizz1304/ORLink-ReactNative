@@ -14,6 +14,7 @@ import { Text,View } from 'react-native'
 // Importing 3rd party dependencies
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+// Renders the Circle Checkbox
 const Checkbox = (props) => {
 
     let selectedIcon = props.marked ? "circle-o" : "circle"
@@ -33,4 +34,4 @@ const Checkbox = (props) => {
 }
 
 // Module Exports.
-module.exports = {Checkbox}
+module.exports = { Checkbox }

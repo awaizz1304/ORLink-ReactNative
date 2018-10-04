@@ -4,10 +4,11 @@
 
 // Fetching dependencies.
 import React , {Component} from 'react'
-import {Text, View} from 'react-native'
+import {Text, View, ScrollView} from 'react-native'
 
 // Third Parties Dependencies.
 import  Textinput  from 'react-native-material-textinput'
+import { Dropdown } from 'react-native-material-dropdown'
 
 // Custom Components
 import { Checkbox } from '../UIComponents/Checkbox'
@@ -23,56 +24,116 @@ const Signup = () => {
             backgroundColor:"#fafbfd"
           }}>
             
-            {/* Top Heading View */}
+
+            {/* Signup Fields Container */}
+            <View style={{flex:0.95}}>
+            <ScrollView style={{width:"100%",height:"100%"}}>
+                {/* Setting up the login fields container */}
+                <View style={{flex:1,flexDirection:"column",justifyContent:"flex-start",alignItems:"center"}}>
+                
+                {/* Top Heading View */}
             <View style={{flex:0.3}}>
             
-                {/* Text Views Container  */}
-                <View
-                    style=
-                    {{
-                        flex:1,
-                        flexDirection:'column'
-                    }}
-                >
+            {/* Text Views Container  */}
+            <View
+                style=
+                {{
+                    flex:1,
+                    flexDirection:'column'
+                }}
+            >
 
-                    {/* Offset View */}
-                    <View style={{flex:0.35,flexDirection:"row"}}/>
+                {/* Heading */}
+                <Text style={{paddingTop:WScale(26),fontSize:WScale(21),fontWeight:'bold',textAlign:'center'}}>
+                    ORLINK
+                </Text>
+                
+                {/* Description */}
+                <Text style={{fontSize:WScale(12),fontWeight:'300',textAlign:'center'}}>
+                    An intuitive surgical{"\n"}
+                    workflow platform
+                </Text>
 
-                    {/* Heading */}
-                    <Text style={{fontSize:WScale(40),fontWeight:'bold',textAlign:'center'}}>
-                        ORLINK
-                    </Text>
-                    
-                    {/* Description */}
-                    <Text style={{fontSize:WScale(20),fontWeight:'300',textAlign:'center'}}>
-                        An intuitive surgical{"\n"}
-                        workflow platform
-                    </Text>
-
-                </View>
+                {/* Sign up signature */}
+                <Text style={{paddingTop:WScale(26),paddingBottom:WScale(33),fontSize:WScale(16),fontWeight:'900',textAlign:'center',color: '#4a4a4a'}}>
+                    SIGN UP
+                </Text>
 
             </View>
 
-            {/* Login Container */}
-            <View style={{flex:0.7}}>
+        </View>
 
-                {/* Setting up the login fields container */}
-                <View style={{flex:1,flexDirection:"column",justifyContent:"flex-start",alignItems:"center"}}>
-                    
-                    {/* Username Field */}
+                    {/* First Name Field */}
                     <View style={{width:'85%'}}>
                         
                         <Textinput
-                            label='Username'
+                            label='First Name'
                             labelColor="#a6a6a6"
                             labelActiveColor="#a6a6a6"
-                            labelActiveScale={WScale(0.8)}
+                            labelActiveScale={WScale(0.6)}
                             underlineColor="#d3dfef"
                             underlineActiveColor="#00a0e3"
                             fontSize={WScale(12)}
                             labelActiveTop={-30}
                             color="#4a4a4a"
-                            marginBottom={WScale(20)}
+                            paddingBottom={WScale(25)}
+                            marginBottom={WScale(27)}
+                        />
+
+                    </View>
+                     {/* Last Name Field */}
+                     <View style={{width:'85%'}}>
+                        
+                        <Textinput
+                            label='Last Name'
+                            labelColor="#a6a6a6"
+                            labelActiveColor="#a6a6a6"
+                            labelActiveScale={WScale(0.6)}
+                            underlineColor="#d3dfef"
+                            underlineActiveColor="#00a0e3"
+                            fontSize={WScale(12)}
+                            labelActiveTop={-30}
+                            color="#4a4a4a"
+                            paddingBottom={WScale(25)}
+                            marginBottom={WScale(27)}
+                        />
+
+                    </View>
+
+                    {/* Phone Number Field */}
+                    <View style={{width:'85%'}}>
+                        
+                        <Textinput
+                            label='Phone Number'
+                            labelColor="#a6a6a6"
+                            labelActiveColor="#a6a6a6"
+                            labelActiveScale={WScale(0.6)}
+                            underlineColor="#d3dfef"
+                            underlineActiveColor="#00a0e3"
+                            fontSize={WScale(12)}
+                            labelActiveTop={-30}
+                            color="#4a4a4a"
+                            paddingBottom={WScale(25)}
+                            marginBottom={WScale(27)}
+                        />
+
+                    </View>
+
+                    {/* Email Id Field */}
+                    <View style={{width:'85%'}}>
+                        
+                        <Textinput
+                            label='Email Id'
+                            labelColor="#a6a6a6"
+                            labelActiveColor="#a6a6a6"
+                            labelActiveScale={WScale(0.6)}
+                            underlineColor="#d3dfef"
+                            underlineActiveColor="#00a0e3"
+                            fontSize={WScale(12)}
+                            labelActiveTop={-30}
+                            color="#4a4a4a"
+                            paddingBottom={WScale(25)}
+                            marginBottom={WScale(27)}
                         />
 
                     </View>
@@ -84,17 +145,58 @@ const Signup = () => {
                             label='Password'
                             labelColor="#a6a6a6"
                             labelActiveColor="#a6a6a6"
-                            labelActiveScale={WScale(0.8)}
+                            labelActiveScale={WScale(0.6)}
                             underlineColor="#d3dfef"
                             underlineActiveColor="#00a0e3"
                             fontSize={WScale(12)}
                             labelActiveTop={-30}
                             color="#4a4a4a"
+                            paddingBottom={WScale(25)}
+                            marginBottom={WScale(27)}
                         />
 
                     </View>
 
-                    {/* Remember/Forgot links */}
+                    {/* Confirm Password Field */}
+                    <View style={{width:'85%'}}>
+                        
+                        <Textinput
+                            label='Confirm Password'
+                            labelColor="#a6a6a6"
+                            labelActiveColor="#a6a6a6"
+                            labelActiveScale={WScale(0.6)}
+                            underlineColor="#d3dfef"
+                            underlineActiveColor="#00a0e3"
+                            fontSize={WScale(12)}
+                            labelActiveTop={-30}
+                            color="#4a4a4a"
+                            paddingBottom={WScale(25)}
+                            marginBottom={WScale(27)}
+                        />
+
+                    </View>
+
+                    {/* I am */}
+                    <View style={{width:'85%'}}>
+                        
+                    <Dropdown
+                        label='I am'
+                        labelFontSize={WScale(12)}
+                        textColor="#a6a6a6"
+                        value={"Choose Option"}
+                        fontSize={WScale(14)}
+                        data={[{
+                            value: 'Banana',
+                          }, {
+                            value: 'Mango',
+                          }, {
+                            value: 'Pear',
+                          }]}
+                    />
+
+                    </View>
+
+                    {/* Terms/Aggrement */}
                     <View
                         style=
                         {{
@@ -120,30 +222,24 @@ const Signup = () => {
                                 fontSize = {WScale(12)}
                                 interPadding = { WScale(6.1) }
                                 iconColor = "#b3bfd0"
-                                message = "Remember me"
+                                message = "I acknowledge the terms & conditions"
                                 messageColor="#a6a6a6"
                             />
-
-                            {/* Forgot password field. */}
-                            <Text
-                                style=
-                                {{
-                                    color: "#4a90e2",
-                                    textAlignVertical:"center",
-                                    fontSize:WScale(12)
-                                }}
-                            >
-                                Forgot password?
-                            </Text>
-
-                            
 
                         </View>
 
                     </View>
 
-                    {/* Login Button */}
-                    <View style=
+                    
+
+                </View>
+                </ScrollView>
+            </View>
+
+            {/* Button Container */}
+            <View style={{alignItems:"center"}}>
+                {/* Login Button */}
+                <View style=
                     {{
                         width:'85%',
                         height:WScale(45),
@@ -161,33 +257,12 @@ const Signup = () => {
 
                         {/* Text Component */}
                         <Text style={{flex:1,textAlign:"center",textAlignVertical:"center",fontSize:WScale(15),fontWeight:'900',color:'white'}}>
-                            LOGIN
+                            SIGN UP
                         </Text>
 
-                    </View>
-                    
-                    {/* New user signup & terms/conditions */}
-                    <View
-                        style=
-                        {{
-                            flex:1,
-                            flexDirection:"column",
-                            justifyContent:"space-between",
-                        }}
-                    >
-
-                        <View style={{paddingTop:WScale(44),flexDirection:"row"}}>
-                            <Text style={{color:"#4a4a4a",fontSize:WScale(14)}}>New user? </Text>
-                            <Text style={{color:"#4a90e2",fontSize:WScale(14)}}>Sign Up</Text>
-                        </View>
-
-                        <Text style={{color: "#a6a6a6",paddingBottom:WScale(18),fontSize:WScale(12)}}>Terms & Condition</Text>
-
-                    </View>
-
                 </View>
-
             </View>
+
         </View>
     );
 };
