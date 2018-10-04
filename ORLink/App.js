@@ -36,8 +36,8 @@ class App extends Component {
     firstLaunch = this.state.firstTimeLaunch;
     return (
       // <Login/>
-      <Signup/>
-      // <LandingPage/>
+      // <Signup/>
+       <LandingPage/>
     )
   }
 }
