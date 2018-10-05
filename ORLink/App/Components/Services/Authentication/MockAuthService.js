@@ -1,7 +1,7 @@
 import HttpError from "../../HttpClient/HttpError";
 
 class MockAuthService {
-    simulateSignupError = true
+    simulateSignupError = false
     simulateLoginError = false
     Login(loginData,successCallBack,errorCallBack){
         setTimeout(() => {

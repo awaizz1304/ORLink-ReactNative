@@ -1,11 +1,11 @@
 import * as types from '../../Common/Constants'
+import { actions } from '../../Store/module';
 
-export const Login = (userName : string ,accessToken : String) => {
+export const Login = (userSession : object) => {
     return {
-      type: types.LOGIN,
-      payload: {
-          userID : userName,
-          accessToken : accessToken,
-      }
+        type: types.LOGIN,
+        payload: {
+            session : userSession
+        }
     }
 }

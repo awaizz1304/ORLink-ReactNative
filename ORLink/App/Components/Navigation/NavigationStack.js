@@ -1,34 +1,21 @@
 import React,{ Component,PropTypes } from 'react';
 import { createStackNavigator } from 'react-navigation';
 
-import Login from '../../Screens/Login';
-import Signup from '../../Screens/Signup';
-import Home from '../../Screens/BottomNavigator';
-import Refer from '../../Screens/Refer';
-import AddButton from '../../Screens/AddButton';
+import LandingPage from '../../Screens/LandingPage';
+import App from '../../../App';
+import WelcomeScreen from '../../Screens/WelcomeScreen';
+import Home from '../../Screens/Home';
+import CreateTeam from '../../Screens/CreateTeam';
 
-
-
-export const LoginNavigationStack = createStackNavigator({
-    Login : {screen: Login},
-    Signup : {screen: Signup},
-    Home : {screen : Home},
-    Refer : {screen : Refer},
+export const NavigationStack = createStackNavigator({
+    App : {screen: App},
+    LandingPage : {screen: LandingPage},
+    WelcomeScreen : {screen : WelcomeScreen},
+    CreateTeam : {screen : CreateTeam},
+    Home : {screen : Home}
 },{
     headerMode : 'none',
-    initialRouteName : 'Login',
+    initialRouteName : 'App',
 });
-
-
-export const HomeNavigationStack = createStackNavigator({
-    Login : {screen: Login},
-    Signup : {screen: Signup},
-    Home : {screen : Home},
-    Refer : {screen : Refer},
-},{
-    headerMode : 'none',
-    initialRouteName : 'Home',
-});
-
 
 

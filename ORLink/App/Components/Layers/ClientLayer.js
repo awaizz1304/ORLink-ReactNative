@@ -44,7 +44,7 @@ class ClientLayer {
         return this.httpClient;
     }
     // returns the instance of shared preferences
-    getSharedPreferences(){
+    getDataManager(){
         return this.sharedPreferences;
     }
     // returns the instance of current auth service

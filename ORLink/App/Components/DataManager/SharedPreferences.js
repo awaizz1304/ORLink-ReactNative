@@ -1,26 +1,15 @@
 import DefaultPreference from 'react-native-default-preference';
+import Storage from "react-native-key-value-store";
+import { AsyncStorage } from "react-native";
 
 class SharedPrefences {
-    SaveValueForKey(key,value){
-        DefaultPreference.set(key,value).then(
-            function(){
-                str = value + " for " + key + " Saved ";
-                console.log(str);
-            }
-        )
+    SaveValueForKey (key,value) {
+        AsyncStorage.setItem(key,value)
     }
-    GetValueForKey(key,valueResponse){
-        DefaultPreference.get(key).then(
-            function(value){
-                str = value + " for " + key + " Retrived ";
-                console.log(str)
-                if(value == undefined || value == ""){
-                    value = null;
-                }
-                valueResponse(value);
-                
-            }
-        )
+    GetValueForKey (key,responseCallBack){
+        AsyncStorage.getItem(key,(err,result)=>{
+            responseCallBack(result)
+        })
     }
 }
 export default SharedPrefences;

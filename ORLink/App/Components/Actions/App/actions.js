@@ -6,3 +6,9 @@ export const loading = (yes: boolean = true) => {
       payload: yes
     }
 }
+export const AppLaunched = (count) => {
+    return {
+        type: types.AppLaunchCount,
+        payload: count
+    }
+}

@@ -1,14 +1,15 @@
 import { handleActions } from 'redux-actions'
 import { LOGIN } from '../../Common/Constants'
+import ClientLayer from '../../Layers/ClientLayer';
 
 export type UserState = {
     loggedIn : boolean,
-    userID : string,
+    session : object,
 }
 
 const initialState : UserState = {
     loggedIn : false,
-    userID : "",
+    session : null,
 }
 
 export default handleActions(
@@ -16,9 +17,8 @@ export default handleActions(
         [LOGIN]: (state: UserState = initialState, action): UserState => {
             const p = action.payload
             return {
-            loggedIn: true,
-            userId: p.userId,
-            fullName: p.fullName
+                loggedIn: true,
+                session : p.session,
             }
         },
     },

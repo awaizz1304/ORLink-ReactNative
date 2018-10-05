@@ -5,6 +5,7 @@ import  {Provider}  from 'react-redux'
 
 import App from '../App'
 import { createStore } from '../store';
+import { NavigationStack } from './Components/Navigation/NavigationStack';
 
 const store = createStore()
 
@@ -15,7 +16,7 @@ export default class Root extends Component{
     render () {
         return (
             <Provider store = {store }>
-                <App/>
+                <NavigationStack />
             </Provider>
         )
     }
