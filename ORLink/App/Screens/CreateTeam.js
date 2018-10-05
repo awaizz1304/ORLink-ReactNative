@@ -1,29 +1,37 @@
 import React , {Component} from 'react'
-import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import CustomButton, { ButtonType } from './CustomButton';
-import StepsCountComponent from './StepsCountComponent';
-
+import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
+import StepsCountComponent from '../UIComponents/StepsCountComponent';
+import TextInput from 'react-native-material-textinput'
+import { WScale,HScale } from '../Modules/MultiResolution'
+import TeamDataModel from '../Components/Services/DataService/DataModels/TeamDataModel';
+import FloatingLabelInput from '../UIComponents/FloatingInput';
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
 export default class CreateTeam extends Component {
+    teamData = null
     constructor (props){
         super(props)
         this.state = {
-            
+            nameText : ""
         }
     }
     componentDidMount () {
 
     }
     OnPressNext = () => {
+        this.teamData = new TeamDataModel()
+        this.teamData.name = this.state.nameText
 
+        // send it as props to new screen
     }
     OnPressBack = () => {
         this.props.navigation.goBack()
     }
     render () {
         return (
+            <TouchableWithoutFeedback>
             <View style = {styles.container}>
                 <View style = {styles.topBar}>
                 <View style = {styles.topBarContentContainer}>
@@ -40,7 +48,24 @@ export default class CreateTeam extends Component {
                 <View style = {styles.upperMiddleContainer}>
                     <StepsCountComponent count = "1" textFirstLine = "What you want to" textSecondLine = "call your team?"/>
                 </View>
-                <View style = {styles.lowerMiddleContainer}></View>
+                <View style = {styles.lowerMiddleContainer}>
+                <View style = {styles.textContainer}>
+                    <TextInput
+                        label='Team Name'
+                        labelColor="#a6a6a6"
+                        labelActiveColor="#a6a6a6"
+                        labelActiveScale={WScale(0.8)}
+                        underlineColor="#d3dfef"
+                        underlineActiveColor="#00a0e3"
+                        fontSize={WScale(12)}
+                        labelActiveTop={-30}
+                        color="#4a4a4a"
+                        marginBottom={WScale(20)}
+                        onChangeText = {(text)=> this.setState({nameText : text})}
+                        ref = {(input) => this.teamName = input}
+                    />
+                </View>
+                </View>
                 <View style = {styles.bottomContainer}>
                     <CustomButton 
                         type = {ButtonType.BigBlueButton} 
@@ -48,6 +73,7 @@ export default class CreateTeam extends Component {
                         action = {()=>this.OnPressNext} />
                 </View>
             </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
@@ -99,9 +125,16 @@ const styles = StyleSheet.create({
     },
     lowerMiddleContainer : {
         flex : 0.63,
+        
+        justifyContent : "center",
+        alignItems : "center"
     },
     bottomContainer  : {
         flex : 0.1,
         alignItems : 'center',
+    },
+    textContainer : {
+        width : window.width * 0.8,
+        justifyContent : "center",
     }
 })

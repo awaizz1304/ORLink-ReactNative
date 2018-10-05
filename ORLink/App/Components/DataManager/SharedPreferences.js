@@ -8,6 +8,9 @@ class SharedPrefences {
     }
     GetValueForKey (key,responseCallBack){
         AsyncStorage.getItem(key,(err,result)=>{
+            if(result == undefined){
+                result = null
+            }
             responseCallBack(result)
         })
     }

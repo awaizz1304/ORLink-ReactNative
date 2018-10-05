@@ -1,4 +1,4 @@
-const Session {
+class Session {
     sessionToken = "";
     userID = "";
 }

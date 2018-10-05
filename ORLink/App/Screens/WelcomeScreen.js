@@ -1,7 +1,6 @@
 import React , {Component} from 'react'
 import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import CustomPopup from './CustomPopup';
-import CustomButton, { ButtonType } from './CustomButton';
+import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0,
         color: "#4a90e2",
-        marginRight : 5,
+        marginRight : 15,
     },
     upperContainer : {
         flex : 0.54,

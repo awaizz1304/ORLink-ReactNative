@@ -8,17 +8,17 @@ export const ButtonType = {
     BigBlueButton : "big blue button",
 }
 
-
-const RenderBigBlueButton = ({text,action}) => {
-    return(
-        <TouchableOpacity onPress = {action}>
-            <View style = {styles.signUpButton}>
-                <Text style = {styles.signupTextStyle}>{text}</Text>
-            </View>
-        </TouchableOpacity>
-    )
-}
 const CustomButton = ({text,action,type}) =>{
+
+    const RenderBigBlueButton = ({text,action}) => {
+        return(
+            <TouchableOpacity onPress = {action}>
+                <View style = {styles.signUpButton}>
+                    <Text style = {styles.signupTextStyle}>{text}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
     
     if(type == ButtonType.BigBlueButton){
         return(

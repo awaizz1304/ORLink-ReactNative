@@ -4,8 +4,8 @@ import Swiper from 'react-native-swiper';
 import { actions } from '../Components/Store/module';
 import { connect } from 'react-redux';
 import ClientLayer from '../Components/Layers/ClientLayer';
-import CustomPopup, { PopupType } from './CustomPopup';
-import CustomButton, { ButtonType } from './CustomButton';
+import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
+import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -19,13 +19,10 @@ class LandingPage extends Component {
     }
   }
   OnPressSignUp = () => {
-    this.setState({isPopupOpen : true})
-    ClientLayer.getInstance().getAuthService().SignUp(null,()=>{
-      this.props.navigation.navigate('WelcomeScreen')
-      this.setState({isPopupOpen : false})
-    },(error)=>{
-
-    })
+    this.props.navigation.navigate('Signup')
+  }
+  OnPressSignIn = () => {
+    this.props.navigation.navigate('Login')
   }
   popUpClosePressed () {
     this.setState({isPopupOpen : false})
@@ -51,15 +48,10 @@ class LandingPage extends Component {
           </View>
           <View style = {styles.middleContainer} />
           <View style = {styles.bottomContainer}>
-            {/* <TouchableOpacity onPress = {this.OnPressSignUp}>
-                <View style = {styles.signUpButton}>
-                  <Text style = {styles.signupTextStyle}>SIGN UP</Text>
-                </View>
-            </TouchableOpacity> */}
-            <CustomButton text = "SIGN IN" action = {()=>this.OnPressSignUp()} type = {ButtonType.BigBlueButton}/>
+            <CustomButton text = "SIGN UP" action = {()=>this.OnPressSignUp()} type = {ButtonType.BigBlueButton}/>
             <View style = {styles.existingUserContainer}>
               <Text style = {styles.existingUserText}>Existing User ? </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress = {this.OnPressSignIn}>
                 <Text style = {styles.signInText}>Sign In</Text>
               </TouchableOpacity>
             </View>
