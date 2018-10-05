@@ -18,6 +18,7 @@ import { Login } from './App/Screens/Login'
 import { Signup } from './App/Screens/Signup'
 import Session from './App/Components/Common/Session';
 import WelcomeScreen from './App/Screens/WelcomeScreen';
+import Home from './App/Screens/Home';
 
 class App extends Component {
   
@@ -85,7 +86,7 @@ class App extends Component {
       else{
         // go to home screen with navigation props
         return (
-          <WelcomeScreen navigation = {this.props.navigation}/>
+            <Home navigation = {this.props.navigation} />
         )
       }
     }
