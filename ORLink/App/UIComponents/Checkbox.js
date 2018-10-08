@@ -9,7 +9,7 @@
 
 // Importing core module
 import React from 'react'
-import { Text,View } from 'react-native'
+import { Text,View,TouchableOpacity } from 'react-native'
 
 // Importing 3rd party dependencies
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -17,14 +17,16 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 // Renders the Circle Checkbox
 const Checkbox = (props) => {
 
-    let selectedIcon = props.marked ? "circle-o" : "circle"
+    let selectedIcon = props.marked ? "circle" : "circle-o"
 
     return (
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
             
-            <Text style={{color:props.messageColor}}>
-                <Icon name={selectedIcon} size={props.iconSize} color={props.iconColor} />
-            </Text>
+            <TouchableOpacity onPress={props.rememberMe}>
+                <Text style={{color:props.messageColor}}>
+                    <Icon name={selectedIcon} size={props.iconSize} color={props.iconColor} />
+                </Text>
+            </TouchableOpacity>
 
             <Text style={{color:props.messageColor,fontSize:props.fontSize,paddingLeft:props.interPadding}}>
                 {props.message}

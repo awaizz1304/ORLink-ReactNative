@@ -14,7 +14,7 @@ import LandingPage from './App/Screens/LandingPage';
 import { actions } from './App/Components/Store/module';
 
 // Dummy Renders
-import { Login } from './App/Screens/Login'
+import { Login } from './App/Screens/Login/Login'
 import { Signup } from './App/Screens/Signup'
 import Session from './App/Components/Common/Session';
 import WelcomeScreen from './App/Screens/WelcomeScreen';
@@ -55,11 +55,11 @@ class App extends Component {
         }
         else{
           // for testing
-          sessionObj = new Session()
-          sessionObj.sessionToken = "kknjkg78q9"
-          sessionObj.userID = "1234"
+          //sessionObj = new Session()
+          //sessionObj.sessionToken = "kknjkg78q9"
+          //sessionObj.userID = "1234"
 
-          ClientLayer.getInstance().getDataManager().SaveValueForKey("Session",JSON.stringify(sessionObj))
+          //ClientLayer.getInstance().getDataManager().SaveValueForKey("Session",JSON.stringify(sessionObj))
         }
         this.setState({dataLoaded : true})
       })

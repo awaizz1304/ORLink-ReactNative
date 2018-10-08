@@ -6,7 +6,7 @@ import App from '../../../App';
 import WelcomeScreen from '../../Screens/WelcomeScreen';
 import Home from '../../Screens/Home';
 import CreateTeam from '../../Screens/CreateTeam';
-import { Login } from "../../Screens/Login";
+import  Login  from "../../Screens/Login/Login";
 import { Signup } from "../../Screens/Signup";
 
 export const NavigationStack = createStackNavigator({
@@ -19,7 +19,7 @@ export const NavigationStack = createStackNavigator({
     Home : {screen : Home}
 },{
     headerMode : 'none',
-    initialRouteName : 'App',
+    initialRouteName : 'LandingPage',
 });
 
 

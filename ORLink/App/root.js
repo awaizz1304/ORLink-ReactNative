@@ -4,10 +4,11 @@ import  {Provider}  from 'react-redux'
 
 
 import App from '../App'
-import { createStore } from '../store';
+import  configureStore  from './Store/configureStore';
 import { NavigationStack } from './Components/Navigation/NavigationStack';
 
-const store = createStore()
+// Passing in store configuration.
+const store = configureStore()
 
 export default class Root extends Component{
     componentDidMount () {
@@ -15,7 +16,7 @@ export default class Root extends Component{
     }
     render () {
         return (
-            <Provider store = {store }>
+            <Provider store = {store}>
                 <NavigationStack />
             </Provider>
         )

@@ -11,7 +11,7 @@ class MockAuthService {
             else{
                 successCallBack()
             }
-        }, 2000);
+        }, 5000);
     }
     SignUp(signupData,successCallBack,errorCallBack){
         setTimeout(() => {
@@ -23,7 +23,7 @@ class MockAuthService {
             else{
                 successCallBack()
             }
-        }, 2000);
+        }, 5000);
     }
 }
 export default MockAuthService
