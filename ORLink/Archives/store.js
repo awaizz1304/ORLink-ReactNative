@@ -1,6 +1,6 @@
 import {createStore as _createStore,combineReducers,applyMiddleware } from 'redux'
-import { reducers,actions } from './App/Components/Store/module'
-export { States } from './App/Components/Store/module'
+import { reducers,actions } from '../App/Components/Store/module'
+export { States } from '../App/Components/Store/module'
 import thunk from 'redux-thunk'
 
 const middlewear = applyMiddleware(thunk)
