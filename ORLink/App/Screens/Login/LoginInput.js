@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { View,StyleSheet,Text,TouchableOpacity } from 'react-native'
 
 // Importing custom modules.
-import { WScale,HScale } from '../../Modules/MultiResolution'
+import { WScale,HScale } from '../../Modules/Multi-Resolution/MultiResolution'
 
 // Importing custom components
 import { Checkbox } from '../../UIComponents/Checkbox'

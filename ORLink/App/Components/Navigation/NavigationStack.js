@@ -7,9 +7,11 @@ import WelcomeScreen from '../../Screens/WelcomeScreen';
 import Home from '../../Screens/Home';
 import CreateTeam from '../../Screens/CreateTeam';
 import  Login  from "../../Screens/Login/Login";
-import { Signup } from "../../Screens/Signup";
+import { Signup } from "../../Screens/Signup/Signup";
+import Splash from '../../Screens/Splash/Splash'
 
 export const NavigationStack = createStackNavigator({
+    Splash: {screen:Splash},
     App : {screen: App},
     LandingPage : {screen: LandingPage},
     Login : {screen : Login},
@@ -19,7 +21,7 @@ export const NavigationStack = createStackNavigator({
     Home : {screen : Home}
 },{
     headerMode : 'none',
-    initialRouteName : 'LandingPage',
+    initialRouteName : 'Splash',
 });
 
 

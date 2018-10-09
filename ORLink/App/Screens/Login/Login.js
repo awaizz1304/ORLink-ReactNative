@@ -20,7 +20,7 @@ import Session from '../../Components/Common/Session'
 import TopHeading from './TopHeading'
 import Logininput from './LoginInput'
 
-// Creating Stateless Component.
+// Creating Statefull Component.
 class Login extends Component
 {
   
@@ -85,18 +85,6 @@ class Login extends Component
     }
 }
 
-// Creating Stylesheet.
-const styles = StyleSheet.create(
-    {
-        mainContainer:
-        {
-            flex: 1,
-            flexDirection: 'column',
-            backgroundColor:"#fafbfd"
-        }
-    }
-)
-
 // Mapping State to props.
 const mapStateToProps = state => {
     return{
@@ -117,6 +105,18 @@ const mapDispatchToProps = dispatch => {
         onLogin:(username,password,remember) => dispatch(login(username,password,remember))
     }
 }
+
+// Creating Stylesheet.
+const styles = StyleSheet.create(
+    {
+        mainContainer:
+        {
+            flex: 1,
+            flexDirection: 'column',
+            backgroundColor:"#fafbfd"
+        }
+    }
+)
 
 // Exporting Component.
 export default connect(mapStateToProps,mapDispatchToProps)(Login)

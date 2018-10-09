@@ -15,7 +15,7 @@ import { actions } from './App/Components/Store/module';
 
 // Dummy Renders
 import { Login } from './App/Screens/Login/Login'
-import { Signup } from './App/Screens/Signup'
+import { Signup } from './App/Screens/Signup/Signup'
 import Session from './App/Components/Common/Session';
 import WelcomeScreen from './App/Screens/WelcomeScreen';
 import Home from './App/Screens/Home';
