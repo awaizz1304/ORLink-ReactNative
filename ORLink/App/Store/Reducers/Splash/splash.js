@@ -1,7 +1,7 @@
 // Splash Reducer containing its concrete implementation.
 
 // Importing action types available on splash.
-import { RESUME,PROCESSING,LANDING,LOGIN,HOME,TOKEN_REFRESH_PENDING,TOKEN_REFRESH_FULFILLED,TOKEN_REFRESH_REJECTED,LOGIN_PENDING,LOGIN_FULFILLED,LOGIN_REJECTED } from '../../Actions/Splash/actionTypes'
+import { PUSH_DATA_INTO_STORE,RESUME,PROCESSING,LANDING,LOGIN,HOME,TOKEN_REFRESH_PENDING,TOKEN_REFRESH_FULFILLED,TOKEN_REFRESH_REJECTED,LOGIN_PENDING,LOGIN_FULFILLED,LOGIN_REJECTED } from '../../Actions/Splash/actionTypes'
 
 // Local state storage.
 const APP_DATA={
@@ -18,8 +18,15 @@ const APP_DATA={
 // Applicaton Reducer
 const applicationReducer = (state=APP_DATA,action) => 
 {
-    console.log("Action Executed::"+action.type)
     switch (action.type) {
+        case PUSH_DATA_INTO_STORE:
+            return {
+                USER_ID:action.payload.USER_ID,
+                USER_EMAIL:action.payload.USER_EMAIL,
+                USER_NAME:action.payload.USER_NAME,
+                USER_PASSWORD:action.payload.USER_PASSWORD,
+                USER_SESSION:action.payload.USER_SESSION
+            }
         case PROCESSING:
             return {
                 ...state,
