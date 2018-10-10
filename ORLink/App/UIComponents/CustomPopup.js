@@ -9,7 +9,10 @@ export const PopupType = {
     SingleButton : 'singleButton',
     DoubleButton : 'doubleButton',
 }
-type Props = {loadingText: string,
+type Props = {
+    type : null,
+    popupOpen : false,
+    loadingText: string,
     title: string,
     description : string,
     actionClose : null,
@@ -25,8 +28,7 @@ class CustomPopup extends Component<Props> {
         }
     }
     componentDidMount () {
-        console.log("CustomPopup")
-        this.setState({modalVisible : this.props.modalVisible})
+        this.setState({modalVisible : this.props.popupOpen})
     }
     componentWillUnmount () {
         this.setState({modalVisible : false})

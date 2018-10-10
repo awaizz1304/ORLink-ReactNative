@@ -6,6 +6,10 @@ import TextInput from 'react-native-material-textinput'
 import { WScale,HScale } from '../Modules/MultiResolution'
 import TeamDataModel from '../Components/Services/DataService/DataModels/TeamDataModel';
 import FloatingLabelInput from '../UIComponents/FloatingInput';
+import ClientLayer from '../Components/Layers/ClientLayer';
+import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
+import { validateTeamName } from '../Components/Utilities/Validator';
+
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
@@ -14,17 +18,35 @@ export default class CreateTeam extends Component {
     constructor (props){
         super(props)
         this.state = {
-            nameText : ""
+            nameText : "",
+            invalidNameText : "",
+            creatingTeam : false
         }
     }
     componentDidMount () {
 
     }
     OnPressNext = () => {
+        
+
+        if(!validateTeamName(this.state.nameText)){
+            this.setState({invalidNameText : "Team name must be at least 5 characters long"})
+            return
+        }
+        this.setState({creatingTeam : true,invalidNameText : ""})
         this.teamData = new TeamDataModel()
         this.teamData.name = this.state.nameText
 
-        // send it as props to new screen
+        ClientLayer.getInstance().getDataService().CreateTeam (this.teamData,(date)=>{
+            this.setState({creatingTeam : false})
+            this.teamData.creationTime = date
+            this.props.navigation.navigate('InviteMemberScreen',{
+                data : this.teamData,
+            })
+        },(error)=>{
+            this.setState({creatingTeam : false})
+        })
+        
     }
     OnPressBack = () => {
         this.props.navigation.goBack()
@@ -55,7 +77,7 @@ export default class CreateTeam extends Component {
                         labelColor="#a6a6a6"
                         labelActiveColor="#a6a6a6"
                         labelActiveScale={WScale(0.8)}
-                        underlineColor="#d3dfef"
+                        underlineColor= {this.state.invalidNameText == "" ? "#d3dfef" : "red"}
                         underlineActiveColor="#00a0e3"
                         fontSize={WScale(12)}
                         labelActiveTop={-30}
@@ -64,14 +86,20 @@ export default class CreateTeam extends Component {
                         onChangeText = {(text)=> this.setState({nameText : text})}
                         ref = {(input) => this.teamName = input}
                     />
+                    <Text style = {styles.invalidTextStyle}>{this.state.invalidNameText}</Text>
                 </View>
                 </View>
                 <View style = {styles.bottomContainer}>
                     <CustomButton 
                         type = {ButtonType.BigBlueButton} 
                         text = "Next" 
-                        action = {()=>this.OnPressNext} />
+                        action = {()=>this.OnPressNext()} />
                 </View>
+                {this.state.creatingTeam ? <CustomPopup
+                    type = {PopupType.Loading}
+                    loadingText = "Creating Team"
+                    popupOpen = {this.state.creatingTeam}
+                /> : null}
             </View>
             </TouchableWithoutFeedback>
         )
@@ -136,5 +164,9 @@ const styles = StyleSheet.create({
     textContainer : {
         width : window.width * 0.8,
         justifyContent : "center",
+    },
+    invalidTextStyle : {
+        color : "red",
+        fontSize : WScale(14)
     }
 })

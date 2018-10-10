@@ -86,7 +86,8 @@ class App extends Component {
       else{
         // go to home screen with navigation props
         return (
-            <Home navigation = {this.props.navigation} />
+            // <Home navigation = {this.props.navigation} />
+            <WelcomeScreen navigation = {this.props.navigation}/>
         )
       }
     }

@@ -62,7 +62,7 @@ class LandingPage extends Component {
           </View>
           {this.state.isPopupOpen ? <CustomPopup 
             type = {PopupType.Loading}
-            modalVisible = {this.state.isPopupOpen}
+            popupOpen = {this.state.isPopupOpen}
             loadingText = "Sending Request"
             // title = "Title"
             // description = "Test description"

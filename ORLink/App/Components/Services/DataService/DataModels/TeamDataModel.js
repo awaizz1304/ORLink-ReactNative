@@ -1,4 +1,5 @@
 class TeamDataModel{
-    name : ""
+    name : "";
+    creationTime : null;
 }
 export default TeamDataModel
