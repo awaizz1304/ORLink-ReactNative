@@ -1,6 +1,6 @@
 import React , {Component} from 'react'
 import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import ClientLayer from '../Components/Layers/ClientLayer';
+import ClientLayer from '../../Components/Layers/ClientLayer';
 
 class Home extends Component {
     constructor (props){
