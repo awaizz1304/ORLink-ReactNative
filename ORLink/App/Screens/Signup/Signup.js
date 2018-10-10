@@ -11,8 +11,8 @@ import  Textinput  from 'react-native-material-textinput'
 import { Dropdown } from 'react-native-material-dropdown'
 
 // Custom Components
-import { Checkbox } from '../UIComponents/Checkbox'
-import { WScale,HScale } from '../Modules/MultiResolution'
+import { Checkbox } from '../../UIComponents/Checkbox'
+import { WScale,HScale } from '../../Modules/Multi-Resolution/MultiResolution'
 
 // Creating Stateless Component.
 const Signup = () => {

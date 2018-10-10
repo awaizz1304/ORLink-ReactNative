@@ -7,7 +7,7 @@
 import { Dimensions } from 'react-native';
 
 // Importing configurations
-import { SAMPLE_SPACE_WIDTH,SAMPLE_SPACE_HEIGHT } from '../../config'
+import { SAMPLE_SPACE_WIDTH,SAMPLE_SPACE_HEIGHT } from '../../Configurations/config'
 
 // Calculating current device width/height
 const { width, height } = Dimensions.get('window');

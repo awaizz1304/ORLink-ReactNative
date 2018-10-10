@@ -50,7 +50,7 @@ class ClientLayer {
     // returns the instance of current auth service
     // their can be multiple auth services
     getAuthService(){
-        return this.authService;
+        return this.authService
     }
 
     getDataService(){

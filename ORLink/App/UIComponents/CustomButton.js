@@ -1,6 +1,6 @@
 import React , {Component} from 'react'
 import {StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback} from 'react-native';
-import { WScale,HScale } from '../Modules/MultiResolution'
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');

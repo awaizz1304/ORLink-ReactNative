@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TouchableOpacity,Modal} from 'react-native';
 import Swiper from 'react-native-swiper';
-import { actions } from '../Components/Store/module';
+import { actions } from '../Store/module'
 import { connect } from 'react-redux';
 import ClientLayer from '../Components/Layers/ClientLayer';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';

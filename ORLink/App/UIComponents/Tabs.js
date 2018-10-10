@@ -10,7 +10,7 @@ import{
 } from 'react-native';
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
-import { WScale,HScale } from '../Modules/MultiResolution'
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 
 export default class Tabs extends Component {
   state = {

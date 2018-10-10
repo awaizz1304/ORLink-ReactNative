@@ -1,7 +1,7 @@
 import React ,{Component} from 'react'
 import {Platform, StyleSheet, Text, View, TouchableOpacity,Modal,TextInput, FlatList} from 'react-native';
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
-import { WScale,HScale } from '../Modules/MultiResolution'
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import { getInitials, formatDate } from '../Components/Utilities/Utilities';
 import ClientLayer from '../Components/Layers/ClientLayer';
 import MemberInviteDataModel, { InviteType } from '../Components/Services/DataService/DataModels/MemberInviteDataModel';

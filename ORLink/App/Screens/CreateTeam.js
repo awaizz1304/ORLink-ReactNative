@@ -3,7 +3,7 @@ import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity, TouchableWith
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 import StepsCountComponent from '../UIComponents/StepsCountComponent';
 import TextInput from 'react-native-material-textinput'
-import { WScale,HScale } from '../Modules/MultiResolution'
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import TeamDataModel from '../Components/Services/DataService/DataModels/TeamDataModel';
 import FloatingLabelInput from '../UIComponents/FloatingInput';
 import ClientLayer from '../Components/Layers/ClientLayer';

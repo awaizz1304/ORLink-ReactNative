@@ -3,7 +3,7 @@ import {Platform, StyleSheet, Text, View, TouchableOpacity,Modal,TextInput, Flat
 import StepsCountComponent from '../UIComponents/StepsCountComponent';
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 // import TextInput from 'react-native-material-textinput'
-import { WScale,HScale } from '../Modules/MultiResolution'
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import Tabs from '../UIComponents/Tabs';
 import { Switch } from 'react-native-switch';
 import { getInitials } from '../Components/Utilities/Utilities';

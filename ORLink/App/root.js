@@ -1,23 +1,54 @@
+/*
+    Sets up all the required dependencies inclusive of Redux and Client Service,
+    initialization.
+*/
+
+// Importing core dependencies.
 import React, {Component} from 'react';
-import {Text} from 'react-native'
+
+// Importing 3rd parties.
 import  {Provider}  from 'react-redux'
 
+// Importing custom modules.
+import  configureStore  from './Store/configureStore'
+import { NavigationStack } from './Components/Navigation/NavigationStack'
+import ClientLayer from './Components/Layers/ClientLayer'
 
-import App from '../App'
-import { createStore } from '../store';
-import { NavigationStack } from './Components/Navigation/NavigationStack';
+// Passing in store configuration.
+const store = configureStore()
 
-const store = createStore()
-
-export default class Root extends Component{
-    componentDidMount () {
+// export default class Root extends Component{
+//     componentDidMount () 
+//     {
         
-    }
-    render () {
-        return (
-            <Provider store = {store }>
-                <NavigationStack />
-            </Provider>
-        )
-    }
+//     }
+//     render () {
+//         return (
+//             <Provider store = {store}>
+//                 <NavigationStack />
+//             </Provider>
+//         )
+//     }
+// }
+
+// Initializing Client Layer.
+const InitializeClientLayer = () => 
+{
+    // Create & Initialize Client Layer.
+    ClientLayer.createInstance()
+    ClientLayer.getInstance().Initialize()
 }
+
+const root = () => {
+
+    // Initializing Client.
+    InitializeClientLayer()
+
+    return (
+        <Provider store = {store}>
+            <NavigationStack/>
+        </Provider>
+    );
+};
+
+export default root;
