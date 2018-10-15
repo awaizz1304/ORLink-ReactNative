@@ -17,15 +17,15 @@ const Navigation = () => {
         <View style={styles.navigationContainer}>
             
             {/* Home Icon */}
-            <Item iconName="md-home" title="Home" selected={true}/>
+            <Item iconName="md-home" type={0} title="Home" selected={true}/>
 
-            <Item iconName="ios-book" title="Procedure" selected={false}/>
+            <Item iconName="book-bookmark" type={1} title="Procedure" selected={false}/>
 
-            <Item iconName="md-home" title="Team" selected={false}/>
+            <Item iconName="users" type={2} title="Team" selected={false}/>
 
-            <Item iconName="md-home" title="Training" selected={false}/>
+            <Item iconName="play-video" type={1} title="Training" selected={false}/>
 
-            <Item iconName="md-home" title="Profile" selected={false}/>
+            <Item iconName="user" type={2} title="Profile" selected={false}/>
 
         </View>
     )

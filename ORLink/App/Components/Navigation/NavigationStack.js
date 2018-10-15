@@ -25,9 +25,10 @@ export const NavigationStack = createStackNavigator({
     InviteCompleteScreen: { screen: InviteComplete },
     Home: { screen: Home },
     Profile: { screen: Profile }
-}, {
+},
+    {
         headerMode: 'none',
-        initialRouteName: 'Profile',
+        initialRouteName: 'Splash',
     });
 
 

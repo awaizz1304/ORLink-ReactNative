@@ -9,12 +9,17 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { WScale, HScale } from '../../../Modules/Multi-Resolution/MultiResolution'
 
 // Importing 3rd party dependencies
-import Icon from 'react-native-vector-icons/Ionicons'
+import IonicIcon from 'react-native-vector-icons/Ionicons'
+import FoundationIcon from 'react-native-vector-icons/Foundation'
+import Fontawesome from 'react-native-vector-icons/FontAwesome'
 
 // Component Concreate Implementation
+
 const Item = (props) => {
 
     let cColor = props.selected ? "#4a90e2" : "#a6a6a6"
+    let IconList = [IonicIcon,FoundationIcon,Fontawesome]
+    let Icon = IconList[props.type]
 
     return (
         <View style={styles.container}>
