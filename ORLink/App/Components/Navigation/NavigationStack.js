@@ -5,6 +5,7 @@ import LandingPage from '../../Screens/LandingPage';
 // import App from '../../../App';
 import WelcomeScreen from '../../Screens/WelcomeScreen';
 import Home from '../../Screens/Home/Home';
+import Profile from '../../Screens/Profile/Profile'
 import CreateTeam from '../../Screens/CreateTeam';
 import InviteMember from '../../Screens/InviteMember';
 import InviteComplete from '../../Screens/InviteComplete';
@@ -22,10 +23,11 @@ export const NavigationStack = createStackNavigator({
     CreateTeam: { screen: CreateTeam },
     InviteMemberScreen: { screen: InviteMember },
     InviteCompleteScreen: { screen: InviteComplete },
-    Home: { screen: Home }
+    Home: { screen: Home },
+    Profile: { screen: Profile }
 }, {
         headerMode: 'none',
-        initialRouteName: 'Splash',
+        initialRouteName: 'Profile',
     });
 
 
