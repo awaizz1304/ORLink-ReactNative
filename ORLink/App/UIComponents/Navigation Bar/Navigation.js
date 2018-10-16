@@ -4,52 +4,61 @@
 
 // Importing dependencies.
 import React from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native'
 
-// Importing custom modules
-import { WScale, HScale } from '../../Modules/Multi-Resolution/MultiResolution'
+// Importing Navigation Component
+import { TabNavigator, TabBarBottom } from 'react-navigation'
+
+
+// Importing Tabar Navigation Screens
+import Home from '../../Screens/Home/Home'
+import Profile from '../../Screens/Profile/Profile'
+import Training from '../../Screens/Training'
+import Team from '../../Screens/Team'
+import Procedure from '../../Screens/Procedure/Procedure'
 
 // Importing custom components
 import Item from './Sub Components/Item'
 
-const Navigation = () => {
-    return (
-        <View style={styles.navigationContainer}>
-            
-            {/* Home Icon */}
-            <Item iconName="md-home" type={0} title="Home" selected={true}/>
-
-            <Item iconName="book-bookmark" type={1} title="Procedure" selected={false}/>
-
-            <Item iconName="users" type={2} title="Team" selected={false}/>
-
-            <Item iconName="play-video" type={1} title="Training" selected={false}/>
-
-            <Item iconName="user" type={2} title="Profile" selected={false}/>
-
-        </View>
-    )
-
-}
-
 // Exporting Component
-export default Navigation
-
-// Componenet stylesheet.
-const styles = StyleSheet.create({
-    navigationContainer:
+export default Navigation = TabNavigator(
     {
-        flexDirection: "row",
-        justifyContent:"space-evenly",
-        alignItems:"center",
-        height: WScale(28*2),
-        backgroundColor:"#ffffff",
-        shadowColor: "rgba(0, 0, 0, 0.08)",
-        shadowOffset: {
-            width: 0,
-            height: -2
+        Home: { screen: Home },
+        Procedure: { screen: Procedure },
+        Team: { screen: Team },
+        Training: { screen: Training },
+        Profile: { screen: Profile }
+    },
+    {
+        navigationOptions: ({ navigation }) =>
+            ({
+                tabBarIcon: ({ focused, tintColor }) => {
+                    // Getting the current navigation state props.
+                    const { routeName } = navigation.state
+
+                    let IconItems =
+                    {
+                        "Home": <Item iconName="md-home" type={0} title="Home" color={tintColor} />,
+                        "Procedure": <Item iconName="book-bookmark" type={1} title="Procedure" color={tintColor} />,
+                        "Team": <Item iconName="users" type={2} title="Team" color={tintColor} />,
+                        "Training": <Item iconName="play-video" type={1} title="Training" color={tintColor} />,
+                        "Profile": <Item iconName="user" type={2} title="Profile" color={tintColor} />
+                    }
+
+                    return IconItems[routeName]
+
+                },
+            }),
+        order: ["Home","Procedure","Team","Training","Profile"],
+        tabBarComponent: TabBarBottom,
+        tabBarPosition: "bottom",
+        tabBarOptions:
+        {
+            activeTintColor: "#4a90e2",
+            inactiveTintColor: "#a6a6a6",
+            showLabel:false
         },
-        shadowRadius: 8,
-        shadowOpacity: 1
+    
+        animationEnabled: true,
+        swipeEnabled: true
     }
-})
+)

@@ -8,7 +8,7 @@ import { StyleSheet, View, ScrollView, Text } from 'react-native'
 
 // Importing sub components
 import Title from './Sub Components/Title'
-import Navigation from '../../UIComponents/Navigation Bar/Navigation'
+// import Navigation from '../../UIComponents/Navigation Bar/Navigation'
 import ProfileView from './Sub Components/ProfileView'
 
 // Importing Modules
@@ -26,9 +26,6 @@ export default class Profile extends Component {
 
                 {/* Profile Rendering */}
                 <ProfileView/>
-
-                {/* Bottom Bar */}
-                <Navigation />
 
             </View>
         )

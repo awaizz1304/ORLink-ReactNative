@@ -44,6 +44,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        shadowOffset: { width: 0, height: 2.5, },
+        shadowColor: 'black',
+        backgroundColor: "#fff",
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 3,
         backgroundColor: "#ffffff"
     },
     headingStyle:
@@ -66,9 +72,9 @@ const styles = StyleSheet.create({
     },
     notificationIcon:
     {
-        position:"absolute",
+        position: "absolute",
         width: WScale(4 * 2),
         height: HScale(4 * 2),
-        right:0
+        right: 0
     }
 })

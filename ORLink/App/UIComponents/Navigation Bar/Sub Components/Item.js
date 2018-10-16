@@ -17,19 +17,17 @@ import Fontawesome from 'react-native-vector-icons/FontAwesome'
 
 const Item = (props) => {
 
-    let cColor = props.selected ? "#4a90e2" : "#a6a6a6"
-    let IconList = [IonicIcon,FoundationIcon,Fontawesome]
+    let IconList = [IonicIcon, FoundationIcon, Fontawesome]
     let Icon = IconList[props.type]
 
     return (
         <View style={styles.container}>
 
-            <TouchableOpacity style={styles.touchableContainer}>
                 {/* Action Item */}
                 <Text style={styles.decsStyle}>
 
                     {/* Icon */}
-                    <Icon name={props.iconName} size={WScale(9.5 * 2)} color={cColor} />{"\n"}
+                    <Icon name={props.iconName} size={WScale(9.5 * 2)} color={props.color} />{"\n"}
 
                     {/* Description */}
                     <Text style={
@@ -39,12 +37,13 @@ const Item = (props) => {
                             fontStyle: "normal",
                             letterSpacing: 0,
                             textAlign: "center",
-                            color: cColor
+                            color: props.color
                         }
-                    }>{props.title}</Text>
+                    }>
+                        {props.title}
+                    </Text>
 
                 </Text>
-            </TouchableOpacity>
 
         </View>
     );
@@ -59,7 +58,8 @@ const styles = StyleSheet.create({
     container:
     {
         height: "100%",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems:"center"
     },
     touchableContainer:
     {
