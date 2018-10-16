@@ -1,7 +1,7 @@
 // Core actions present on login view.
 
 // Fetching action types.
-import { RESUME,PROCESSING,HOME,LANDING,LOGIN,TOKEN_REFRESH_PENDING,TOKEN_REFRESH_FULFILLED,TOKEN_REFRESH_REJECTED,LOGIN_PENDING,LOGIN_FULFILLED,LOGIN_REJECTED } from './actionTypes'
+import { PUSH_DATA_INTO_STORE,RESUME,PROCESSING,HOME,LANDING,LOGIN,TOKEN_REFRESH_PENDING,TOKEN_REFRESH_FULFILLED,TOKEN_REFRESH_REJECTED,LOGIN_PENDING,LOGIN_FULFILLED,LOGIN_REJECTED } from './actionTypes'
 
 // Importing Custom Modules.
 import ClientLayer from '../../../Components/Layers/ClientLayer'
@@ -10,6 +10,15 @@ import ClientLayer from '../../../Components/Layers/ClientLayer'
 import { APP_DATA } from '../../../Cache/Address'
 
 // Actions
+
+// Pushing application data into store
+export const push_app_data_into_store = (app_data) =>
+{
+    return{
+        type:PUSH_DATA_INTO_STORE,
+        payload:app_data
+    }
+}
 
 // Resume Action
 export const resume = (app_data) =>
@@ -23,11 +32,10 @@ export const resume = (app_data) =>
         if(app_data==null)
         {
             // First App Launch.
-            let DATA = {USER_LAUNCH_COUNT:1}
-            ClientLayer.getInstance().getDataManager().SaveValueForKey(APP_DATA,JSON.stringify(DATA))
+            ClientLayer.getInstance().getDataManager().SaveValueForKey(APP_DATA,JSON.stringify({USER_LAUNCH_COUNT:1}))
 
             // Routing application to landing page.
-            setTimeout(() => dispatch(landing(DATA.USER_LAUNCH_COUNT,'LandingPage')),5000)
+            setTimeout(() => dispatch(landing(1,'LandingPage')),5000)
 
         }
         else

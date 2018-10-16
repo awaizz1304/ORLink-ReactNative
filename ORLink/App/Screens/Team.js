@@ -199,7 +199,6 @@ const styles = StyleSheet.create({
     },
     rowItemTextContainer : {
         marginLeft : WScale(20),
-        // width : '100%'
         flex : 1,
     },
     nameStyle : {

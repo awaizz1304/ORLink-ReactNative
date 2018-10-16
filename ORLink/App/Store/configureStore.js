@@ -10,14 +10,17 @@ import promise from 'redux-promise-middleware'  //Suited for promise based async
 // Importing Reducers.
 import loginReducer  from './Reducers/Login/login'
 import applicationReducer from './Reducers/Splash/splash'
+
 import videosDataReducer from './Reducers/DataFetch/videosDataReducer'
 import teamDataReducer from './Reducers/TeamReducer'
 import passwordChangeReducer from './Reducers/Password/changePassword'
+import signupReducer from './Reducers/Signup/signup'
 // Store Reducers
 //import { reducers } from '../Components/Store/module'
 
 // Setting up root reducer i.e. all the fellow reducers merge into it.
-const rootReducer = combineReducers({login:loginReducer,APP_DATA:applicationReducer,videoData : videosDataReducer,team : teamDataReducer,password : passwordChangeReducer})
+const rootReducer = combineReducers({login:loginReducer,APP_DATA:applicationReducer,SIGN_UP_DATA:signupReducer,
+    videoData : videosDataReducer,team : teamDataReducer,password : passwordChangeReducer})
 
 // Setting up middlewares for the application.
 const middleWares = applyMiddleware(thunk,promise())
