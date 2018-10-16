@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import {StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback,Image} from 'react-native';
 import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 
 const Dimensions = require('Dimensions');
@@ -18,6 +18,10 @@ const CustomButton = ({text,action,type,width,height,style,textStyle}) =>{
                 <View style = {styles.signUpButton}>
                     <Text style = {styles.signupTextStyle}>{text}</Text>
                 </View>
+                <View style = {styles.shadoView}>
+                <Image style = {styles.shadowImage} source = {require('../assets/Common/ButtonShadow/rectangle2Copy2.png')} />
+                </View>
+                
             </TouchableOpacity>
         )
     }
@@ -99,6 +103,18 @@ const styles = StyleSheet.create ({
         backgroundColor : 'rgba(0,0,0,0.1)',
         alignItems : 'center',
         justifyContent : "center"
+    },
+    shadoView : {
+        marginTop : -24,
+        width : window.width * 0.8,
+        height: WScale(60),
+        justifyContent : 'center',
+        alignItems :'center'
+    },
+    shadowImage : {
+        width:  WScale(220),
+        
+        // opacity: 0.5
     }
 })
 export default CustomButton

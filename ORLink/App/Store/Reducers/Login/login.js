@@ -12,7 +12,7 @@ const LoginState={
     login_token:null,
     user_id:null,
     logging_flag:null,
-    login_error:null
+    login_error:null,
 }
 
 // Reducer Implementation

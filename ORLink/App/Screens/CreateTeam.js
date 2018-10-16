@@ -9,22 +9,31 @@ import FloatingLabelInput from '../UIComponents/FloatingInput';
 import ClientLayer from '../Components/Layers/ClientLayer';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
 import { validateTeamName } from '../Components/Utilities/Validator';
+import TopComponent from '../UIComponents/TopComponent'
+import { connect } from "react-redux";
+import {createTeam} from '../Store/Actions/TeamActions'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
-export default class CreateTeam extends Component {
+class CreateTeam extends Component {
     teamData = null
     constructor (props){
         super(props)
         this.state = {
             nameText : "",
             invalidNameText : "",
-            creatingTeam : false
         }
     }
     componentDidMount () {
 
+    }
+    componentDidUpdate () {
+        if(this.props.data != null){
+            this.props.navigation.navigate('InviteMemberScreen',{
+                data : this.props.data,
+            })
+        }
     }
     OnPressNext = () => {
         
@@ -33,19 +42,21 @@ export default class CreateTeam extends Component {
             this.setState({invalidNameText : "Team name must be at least 5 characters long"})
             return
         }
-        this.setState({creatingTeam : true,invalidNameText : ""})
+        this.setState({invalidNameText : ""})
         this.teamData = new TeamDataModel()
         this.teamData.name = this.state.nameText
 
-        ClientLayer.getInstance().getDataService().CreateTeam (this.teamData,(date)=>{
-            this.setState({creatingTeam : false})
-            this.teamData.creationTime = date
-            this.props.navigation.navigate('InviteMemberScreen',{
-                data : this.teamData,
-            })
-        },(error)=>{
-            this.setState({creatingTeam : false})
-        })
+        this.props.onCreateTeam(this.teamData)
+
+        // ClientLayer.getInstance().getDataService().CreateTeam (this.teamData,(date)=>{
+            
+        //     this.teamData.creationTime = date
+        //     this.props.navigation.navigate('InviteMemberScreen',{
+        //         data : this.teamData,
+        //     })
+        // },(error)=>{
+            
+        // })
         
     }
     OnPressBack = () => {
@@ -56,16 +67,13 @@ export default class CreateTeam extends Component {
             <TouchableWithoutFeedback>
             <View style = {styles.container}>
                 <View style = {styles.topBar}>
-                <View style = {styles.topBarContentContainer}>
-                    <View style = {styles.topBarButtonContainer}>
-                    <TouchableOpacity onPress = {this.OnPressBack}>
-                        <Text style = {styles.backText}>Back</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <Text style = {styles.headingText}>Create Team</Text>
-                    <View style = {styles.topBarButtonContainer}></View>
-                    
-                </View>
+                <TopComponent
+                    heading = "Create Team"
+                    leftButton = "Back"
+                    leftButtonAction = {()=>this.OnPressBack()}
+                    rightButton = ""
+                    rightButtonAction = {null}
+                />
                 </View>
                 <View style = {styles.upperMiddleContainer}>
                     <StepsCountComponent count = "1" textFirstLine = "What you want to" textSecondLine = "call your team?"/>
@@ -95,16 +103,30 @@ export default class CreateTeam extends Component {
                         text = "Next" 
                         action = {()=>this.OnPressNext()} />
                 </View>
-                {this.state.creatingTeam ? <CustomPopup
+                {this.props.creatingTeam ? <CustomPopup
                     type = {PopupType.Loading}
                     loadingText = "Creating Team"
-                    popupOpen = {this.state.creatingTeam}
+                    popupOpen = {this.props.creatingTeam}
                 /> : null}
             </View>
             </TouchableWithoutFeedback>
         )
     }
 }
+const mapStateToProps = state => {
+    return{
+        creatingTeam : state.team.creatingTeam,
+        data : state.team.teamData,
+        error : state.team.error,
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onCreateTeam : (teamData) =>
+            dispatch(createTeam(teamData))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(CreateTeam)
 const styles = StyleSheet.create({
     container: {
         flex : 1,
@@ -112,14 +134,14 @@ const styles = StyleSheet.create({
     },
     topBar : {
         flex : 0.11,
-        shadowOffset:{  width: 0,  height: 2.5,  },
-        shadowColor: 'black',
-        backgroundColor : "#fff",
-        shadowOpacity: 0.1,
-        shadowRadius : 3,
-        elevation : 3,
-        justifyContent : "center",
-        alignItems : "center",
+        // shadowOffset:{  width: 0,  height: 2.5,  },
+        // shadowColor: 'black',
+        // backgroundColor : "#fff",
+        // shadowOpacity: 0.1,
+        // shadowRadius : 3,
+        // elevation : 3,
+        // justifyContent : "center",
+        // alignItems : "center",
     },
     topBarContentContainer : {
         width : window.width * 0.95,

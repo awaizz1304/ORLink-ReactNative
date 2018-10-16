@@ -8,9 +8,14 @@ import Tabs from '../UIComponents/Tabs';
 import { Switch } from 'react-native-switch';
 import { getInitials } from '../Components/Utilities/Utilities';
 import { validateEmail, validateMobileNumber } from '../Components/Utilities/Validator';
-import MemberInviteDataModel, { InviteType } from '../Components/Services/DataService/DataModels/MemberInviteDataModel';
+import TeamMemberDataModel, { InviteType } from '../Components/Services/DataService/DataModels/TeamMemberDataModel';
 import ClientLayer from '../Components/Layers/ClientLayer';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
+import CustomListItem from '../UIComponents/CustomListItem'
+import TopComponent from '../UIComponents/TopComponent'
+
+import { connect } from "react-redux";
+import {IniviteTeamMembers} from '../Store/Actions/TeamActions'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -30,35 +35,48 @@ class InviteMember extends Component {
             data : [],
             canAdd : true,
             adminRights : [],
-            sendingRequest : false,
             invalidEmail : false,
             invalidPhone : false,
             teamData : null,
-            showIntroTopBar : true
+            showIntroTopBar : true,
+            responseData : null
         }
     }
     componentDidMount () {
-        console.log("componentDidMount")
-        // memberData = new MemberInviteDataModel()
-        // memberData.name = "Jon Snow"
-        // memberData.email = "jonsnow@gameofthrones.com"
-        // memberData.addAsAdmin = true
-        // memberData.id = 12
+        memberData = new TeamMemberDataModel()
+        memberData.name = "Jon Snow"
+        memberData.email = "jonsnow@gameofthrones.com"
+        memberData.addAsAdmin = true
+        memberData.id = 12
 
-        // this.dummyDataArray.push(memberData)
-        // this.setState({data : this.dummyDataArray},()=>{
-        //     var checks = []
-        //     this.state.data.forEach((_data) => {
-        //     checks.push(_data.addAsAdmin)
-        //     })
-        //     this.setState({adminRights : checks})
-        // })
+        this.dummyDataArray.push(memberData)
+        this.setState({data : this.dummyDataArray},()=>{
+            var checks = []
+            this.state.data.forEach((_data) => {
+            checks.push(_data.addAsAdmin)
+            })
+            this.setState({adminRights : checks})
+        })
         
         const teamData = this.props.navigation.getParam('data',null)
         this.setState({teamData : teamData})
     }
+    componentDidUpdate () {
+        if(this.props.membersData != null){
+            if(this.state.showIntroTopBar){
+                this.props.navigation.navigate('InviteCompleteScreen',{
+                    membersData : this.state.data,
+                    teamData : this.state.teamData,
+                    returnData : this.OnGettingBack.bind(this)
+                })
+                
+            }
+        }
+    }
+
+
     AddMemberToList = (type) => {
-        memberData = new MemberInviteDataModel()
+        memberData = new TeamMemberDataModel()
         memberData.name = "Awais Khan"
         memberData.email = this.state.email
         memberData.phoneNumber = this.state.phoneNumber
@@ -105,17 +123,8 @@ class InviteMember extends Component {
         
     }
     OnPressInvite = () => {
-        this.setState({sendingRequest : true})
-        ClientLayer.getInstance().getDataService().InviteMembers (this.state.data,()=>{
-            this.setState({sendingRequest : false})
-            this.props.navigation.navigate('InviteCompleteScreen',{
-                membersData : this.state.data,
-                teamData : this.state.teamData,
-                returnData : this.OnGettingBack.bind(this)
-            })
-        },(error)=>{
-            this.setState({sendingRequest : false})
-        })
+        this.setState({showIntroTopBar : true})
+        this.props.onInviteMembers(this.dummyDataArray)
     }
     renderSwitch = (props) => {
         return(
@@ -135,8 +144,50 @@ class InviteMember extends Component {
     renderMessageIcon = () => {
         return(
             <View style = {styles.messageIcon}>
-                <Image source = {require('../assets/invitation3x.png')} />
+                <Image source = {require('../assets/Invite/invitation3x.png')} />
             </View>
+        )
+    }
+    ListSwitchToggle = (index) => {
+        this.setState({adminRights : !this.state.adminRights[index]})
+        console.log("Swicth")
+    }
+    ListItem = (props) => {
+        const item = props.item
+        const index = props.index
+        return (
+            <View style = {styles.listItem}>
+                <View style = {styles.imageView}>
+                    <Text style = {styles.initialsText}>{getInitials(item.name)}</Text>
+                </View>
+                <View style = {styles.rowItemTextContainer}>
+                    <Text style = {styles.nameStyle}>{item.name}</Text>
+                    <Text style = {styles.emailStyle}>{item.inviteType == InviteType.InviteViaEmail ? item.email : item.phoneNumber}</Text>
+                    <Text />
+                    <View style = {styles.separatorStyle} />
+                    <Text></Text>
+                    <View style = {styles.listItemBottomContainer}>
+                        <Text style = {styles.headingsTextSmall} >Admin</Text>
+                        <Switch
+                            value={this.state.adminRights[index]}
+                            circleSize={WScale(23)}
+                            onValueChange={(val) => this.setState({adminRights : !this.state.adminRights[index]})}
+                            barHeight={WScale(18)}
+                            circleBorderWidth={0}
+                            backgroundActive={'rgba(74, 144, 226, 0.2)'}
+                            backgroundInactive={'lightgray'}
+                            circleActiveColor={'rgb(74, 144, 226)'}
+                            circleInActiveColor={'gray'}
+                        />
+                        <View style = {styles.emptySpace}/>
+                        <TouchableOpacity style = {styles.removeItem}>
+                            <Text style = {styles.headingsTextSmall} >Remove</Text>
+                        </TouchableOpacity>
+                        <View style = {styles.emptySpaceEnd}/>
+                    </View>
+                    
+                </View> 
+                </View>
         )
     }
     renderMembersList = () => {
@@ -147,41 +198,9 @@ class InviteMember extends Component {
             data = {this.state.data}
             extraData={this.state}
             renderItem={({item,index}) =>
-                <View style = {styles.listItemContiner}>
-                    <View style = {styles.listItem} >
-                    <View style = {styles.imageView}>
-                        <Text style = {styles.initialsText}>{getInitials(item.name)}</Text>
-                    </View>
-                    <View style = {styles.rowItemTextContainer}>
-                        <Text style = {styles.nameStyle}>{item.name}</Text>
-                        <Text style = {styles.emailStyle}>{item.inviteType == InviteType.InviteViaEmail ? item.email : item.phoneNumber}</Text>
-                        <Text />
-                        <View style = {styles.separatorStyle} />
-                        <Text></Text>
-                        <View style = {styles.listItemBottomContainer}>
-                            <Text style = {styles.headingsTextSmall} >Admin</Text>
-                            <Switch
-                                value={this.state.adminRights[index]}
-                                circleSize={WScale(23)}
-                                onValueChange={(val) => this.setState({adminRights : !this.state.adminRights[index]})}
-                                barHeight={WScale(18)}
-                                circleBorderWidth={0}
-                                backgroundActive={'rgba(74, 144, 226, 0.2)'}
-                                backgroundInactive={'lightgray'}
-                                circleActiveColor={'rgb(74, 144, 226)'}
-                                circleInActiveColor={'gray'}
-                            />
-                            <View style = {styles.emptySpace}/>
-                            <TouchableOpacity style = {styles.removeItem}>
-                                <Text style = {styles.headingsTextSmall} >Remove</Text>
-                            </TouchableOpacity>
-                            <View style = {styles.emptySpaceEnd}/>
-                        </View>
-                        
-                    </View>
-                        
-                    </View>
-                </View>
+                <CustomListItem
+                 content = {<this.ListItem item = {item} index = {index}/>}
+                 />
             }
             keyExtractor={item => item.email}
             /> 
@@ -211,16 +230,13 @@ class InviteMember extends Component {
         return(
             <View style = {styles.container}>
                 <View style = {styles.topBar}>
-                <View style = {styles.topBarContentContainer}>
-                    <View style = {styles.topBarButtonContainer}>
-                    <TouchableOpacity onPress = {this.OnPressBack}>
-                        <Text style = {styles.backText}>Back</Text>
-                    </TouchableOpacity>
-                    </View>
-                    <Text style = {styles.headingText}>Invite members</Text>
-                    <View style = {styles.topBarButtonContainer}></View>
-                    
-                </View>
+                <TopComponent
+                    heading = "Invite Members"
+                    leftButton = "Back"
+                    leftButtonAction = {()=>this.OnPressBack()}
+                    rightButton = ""
+                    rightButtonAction = {null}
+                />
                 </View>
                 <this.renderUpperContainer show = {this.state.showIntroTopBar}/>
                 <View style = {styles.upperMiddleContainer}>
@@ -290,9 +306,9 @@ class InviteMember extends Component {
                         text = {this.state.data.length > 0 ? "INVITE" : "NEXT"} 
                         action = {this.state.data.length > 0 ? ()=>this.OnPressInvite() : null} />
                 </View>
-                {this.state.sendingRequest ? <CustomPopup 
+                {this.props.invitingMembers ? <CustomPopup 
                     type = {PopupType.Loading}
-                    popupOpen = {this.state.sendingRequest}
+                    popupOpen = {this.props.invitingMembers}
                     loadingText = "Sending Request"
                 /> : null }
             </View>
@@ -300,6 +316,20 @@ class InviteMember extends Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return{
+        invitingMembers : state.team.invitingMembers,
+        membersData : state.team.membersData,
+        error : state.team.error,
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onInviteMembers : (membersData) =>
+            dispatch(IniviteTeamMembers(membersData))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(InviteMember)
 const styles = StyleSheet.create({
     container: {
         flex : 1,
@@ -509,4 +539,3 @@ const styles = StyleSheet.create({
         flex : 0.15,
     }
 })
-export default InviteMember

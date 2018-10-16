@@ -25,5 +25,10 @@ class MockAuthService {
             }
         }, 5000);
     }
+    ChangePassword(passwordChangeData,successCallBack,errorCallBack){
+        setTimeout(()=>{
+            successCallBack()
+        },2000)
+    }
 }
 export default MockAuthService

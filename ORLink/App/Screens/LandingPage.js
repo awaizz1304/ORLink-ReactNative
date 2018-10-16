@@ -1,11 +1,12 @@
 import React , {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity,Modal} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity,Modal,Image} from 'react-native';
 import Swiper from 'react-native-swiper';
 import { actions } from '../Store/module'
 import { connect } from 'react-redux';
 import ClientLayer from '../Components/Layers/ClientLayer';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -36,7 +37,9 @@ class LandingPage extends Component {
               activeDot={<View style={styles.activeDotSyle} />}
               >
                 <View style={styles.slide1}>
-                <Text style={styles.text}>Image 1</Text>
+                    <Image style = {styles.logoImage} source = {require('../assets/Common/ORlinkIcon_black/bitmapCopy.png')} />
+                    <Text style = {styles.boldTextStyle}>9000+</Text>
+                    <Text style = {styles.textStyle}>Surgical Professionals {"\n"}are using Orlink for{"\n"}collaboration</Text>
                 </View>
                 <View style={styles.slide2}>
                 <Text style={styles.text}>Image 2</Text>
@@ -107,9 +110,7 @@ const styles = StyleSheet.create({
     },
     slide1: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#9DD6EB',
+      backgroundColor: 'rgb(12,192,176)',
     },
     slide2: {
       flex: 1,
@@ -148,9 +149,9 @@ const styles = StyleSheet.create({
     },
     activeDotSyle : {
       backgroundColor : "#0ac8b8",
-      width: 13,
-      height: 13, 
-      borderRadius: 6.5, 
+      width: 15,
+      height: 15, 
+      borderRadius: 7.5, 
       marginLeft: 5, 
       marginRight: 5
     },
@@ -204,5 +205,31 @@ const styles = StyleSheet.create({
       textAlign: "center",
       color: "#a6a6a6"
     },
-    
+    logoImage : {
+      marginTop : WScale(28),
+      marginLeft : WScale(30),
+      width: WScale(76),
+      height: WScale(15),
+    },
+    textStyle : {
+      marginTop : WScale(5),
+      marginLeft : WScale(30),
+      fontFamily: "Avenir",
+      fontSize: WScale(20),
+      fontWeight: "900",
+      fontStyle: "normal",
+      lineHeight: WScale(25),
+      letterSpacing: 0,
+      color: "#ffffff"
+    },
+    boldTextStyle : {
+      marginTop : WScale(30),
+      marginLeft : WScale(30),
+      fontFamily: "Avenir",
+      fontSize: WScale(50),
+      fontWeight: "900",
+      fontStyle: "normal",
+      letterSpacing: 0,
+      color: "#ffffff"
+    }
   });

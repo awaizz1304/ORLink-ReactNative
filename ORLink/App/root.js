@@ -36,7 +36,11 @@ const InitializeClientLayer = () =>
 {
     // Create & Initialize Client Layer.
     ClientLayer.createInstance()
-    ClientLayer.getInstance().Initialize()
+    ClientLayer.getInstance().InitializeWithCallBack(()=>{
+        console.log("initialized")
+    },()=>{
+
+    })
 }
 
 const root = () => {

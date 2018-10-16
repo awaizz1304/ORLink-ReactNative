@@ -4,14 +4,18 @@ import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import { getInitials, formatDate } from '../Components/Utilities/Utilities';
 import ClientLayer from '../Components/Layers/ClientLayer';
-import MemberInviteDataModel, { InviteType } from '../Components/Services/DataService/DataModels/MemberInviteDataModel';
+import TeamMemberDataModel, { InviteType, InviteStatus } from '../Components/Services/DataService/DataModels/TeamMemberDataModel';
 import { Switch } from 'react-native-switch';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
+import TopComponent from '../UIComponents/TopComponent'
+import CustomListItem from '../UIComponents/CustomListItem'
+import { connect } from "react-redux";
+import {IniviteSingleTeamMember} from '../Store/Actions/TeamActions'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
-export default class InviteComplete extends Component {
+class InviteComplete extends Component {
     fromCreateTeamScreen = false
     constructor (props){
         super(props)
@@ -19,26 +23,27 @@ export default class InviteComplete extends Component {
             teamData : null,
             data : [],
             adminRights : [],
-            sendingInvite : false,
-            teamCreationDate : null
+            teamCreationDate : null,
+            showIntorBar : true
         }
     }
     componentDidMount () {
         const membersData = this.props.navigation.getParam('membersData',null)
         const teamData = this.props.navigation.getParam('teamData',null)
+        const showIntroBar = this.props.navigation.getParam('introBar',true)
         this.setState({data : membersData,teamData : teamData},()=>{
             var checks = []
             this.state.data.forEach((_data) => {
             checks.push(_data.addAsAdmin)
             })
-            formattedDate = formatDate(this.state.teamData.creationTime)
-            this.setState({adminRights : checks,teamCreationDate : formattedDate})
+            // formattedDate = formatDate(this.state.teamData.creationTime)
+            this.setState({adminRights : checks,showIntorBar : showIntroBar})
             
         })
         fromCreateTeamScreen = true
     }
     OnPressHome () {
-
+        this.props.navigation.goBack()
     }
     OnPressInviteNewMember () {
         this.props.navigation.state.params.returnData()
@@ -47,11 +52,63 @@ export default class InviteComplete extends Component {
     OnPressResendInvite = (index) => {
         this.setState({sendingInvite : true})
         dataItem = this.state.data[index]
-        ClientLayer.getInstance().getDataService().SingleInvite(dataItem,()=>{
-            this.setState({sendingInvite : false})
-        },(error)=>{
-            this.setState({sendingInvite : false})
-        })
+
+        this.props.onInviteMember(dataItem)
+    }
+    renderTeamMemberRole = (props) => {
+        const memberRole = props.role
+        const inviteStatus = props.inviteStatus
+        if(inviteStatus == InviteStatus.Pending){
+            return(
+                <TouchableOpacity onPress = {this.OnPressResendInvite}> 
+                    <Text style = {styles.resendInvite}>Resend Invite?</Text>
+                </TouchableOpacity>
+            )
+        }
+        else{
+            return(
+                <Text style = {styles.resendInvite}>{memberRole}</Text>
+            )
+            
+        }
+    }
+    ListItem = (props) => {
+        const item = props.item
+        const index = props.index
+        return(
+            <View style = {styles.listItem}> 
+            <View style = {styles.imageView}>
+                <Text style = {styles.initialsText}>{getInitials(item.name)}</Text>
+            </View>
+            <View style = {styles.rowItemTextContainer}>
+                <Text style = {styles.nameStyle}>{item.name}</Text>
+                <Text style = {styles.emailStyle}>{item.inviteType == InviteType.InviteViaEmail ? item.email : item.phoneNumber}</Text>
+                <this.renderTeamMemberRole role = {item.role} inviteStatus = {item.inviteStatus}/>
+                <View style = {styles.separatorStyle} />
+                <Text />
+                <View style = {styles.listItemBottomContainer}>
+                    <Text style = {styles.headingsTextSmall} >Admin</Text>
+                    <Switch
+                        value={this.state.adminRights[index]}
+                        circleSize={WScale(23)}
+                        onValueChange={(val) => this.setState({adminRights : !this.state.adminRights[index]})}
+                        barHeight={WScale(18)}
+                        circleBorderWidth={0}
+                        backgroundActive={'rgba(74, 144, 226, 0.2)'}
+                        backgroundInactive={'lightgray'}
+                        circleActiveColor={'rgb(74, 144, 226)'}
+                        circleInActiveColor={'gray'}
+                    />
+                    <View style = {styles.emptySpace}/>
+                    <TouchableOpacity style = {styles.removeItem}>
+                        <Text style = {styles.headingsTextSmall} >Remove</Text>
+                    </TouchableOpacity>
+                    <View style = {styles.emptySpaceEnd}/>
+                </View>
+                
+            </View>
+            </View>
+        )
     }
     renderMembersList = () => {
         return(
@@ -60,63 +117,19 @@ export default class InviteComplete extends Component {
             data = {this.state.data}
             extraData={this.state}
             renderItem={({item,index}) =>
-                <View style = {styles.listItemContiner}>
-                    <View style = {styles.listItem} >
-                    <View style = {styles.imageView}>
-                        <Text style = {styles.initialsText}>{getInitials(item.name)}</Text>
-                    </View>
-                    <View style = {styles.rowItemTextContainer}>
-                        <Text style = {styles.nameStyle}>{item.name}</Text>
-                        <Text style = {styles.emailStyle}>{item.inviteType == InviteType.InviteViaEmail ? item.email : item.phoneNumber}</Text>
-                        <TouchableOpacity onPress = {this.OnPressInviteNewMember}> 
-                            <Text style = {styles.resendInvite}>Resend Invite?</Text>
-                        </TouchableOpacity>
-                        <View style = {styles.separatorStyle} />
-                        <Text />
-                        <View style = {styles.listItemBottomContainer}>
-                            <Text style = {styles.headingsTextSmall} >Admin</Text>
-                            <Switch
-                                value={this.state.adminRights[index]}
-                                circleSize={WScale(23)}
-                                onValueChange={(val) => this.setState({adminRights : !this.state.adminRights[index]})}
-                                barHeight={WScale(18)}
-                                circleBorderWidth={0}
-                                backgroundActive={'rgba(74, 144, 226, 0.2)'}
-                                backgroundInactive={'lightgray'}
-                                circleActiveColor={'rgb(74, 144, 226)'}
-                                circleInActiveColor={'gray'}
-                            />
-                            <View style = {styles.emptySpace}/>
-                            <TouchableOpacity style = {styles.removeItem}>
-                                <Text style = {styles.headingsTextSmall} >Remove</Text>
-                            </TouchableOpacity>
-                            <View style = {styles.emptySpaceEnd}/>
-                        </View>
-                        
-                    </View>
-                        
-                    </View>
-                </View>
+                <CustomListItem
+                content = {<this.ListItem item = {item} index = {index}/>}
+                />
             }
             keyExtractor={item => item.email}
             /> 
         )
     }
-    render () {
+    renderIntroContent = () => {
+        if(!this.state.showIntorBar){
+            return null
+        }
         return(
-            <View style = {styles.container}>
-            <View style = {styles.topBar}>
-            <View style = {styles.topBarContentContainer}>
-                <View style = {styles.topBarButtonContainer}>
-                <TouchableOpacity onPress = {this.OnPressHome}>
-                    <Text style = {styles.backText}>Home</Text>
-                </TouchableOpacity>
-                </View>
-                <Text style = {styles.headingText}>Orlink Docs</Text>
-                <View style = {styles.topBarButtonContainer}></View>
-                
-            </View>
-            </View>
             <View style = {styles.upperContainer}>
             <View style = {styles.upperContentContainer}>
                 <Text style = {styles.textIntro}>We have sent an invitation to your {"\n"}team members.</Text>
@@ -131,6 +144,21 @@ export default class InviteComplete extends Component {
                 />
             </View>
             </View>
+        )
+    }
+    render () {
+        return(
+            <View style = {styles.container}>
+            <View style = {styles.topBar}>
+            <TopComponent
+                heading = {this.state.teamData == null ? "" : this.state.teamData.name}
+                leftButton = {this.state.showIntorBar ? "Home" : "Back"}
+                leftButtonAction = {()=>this.OnPressHome()}
+                rightButton = ""
+                rightButtonAction = {null}
+            />
+            </View>
+            <this.renderIntroContent />
             <View style = {styles.middleContainer}>
             <View style = {styles.middleContentContainer}>
                 <Text style = {styles.textDocs}>
@@ -143,7 +171,7 @@ export default class InviteComplete extends Component {
                 </Text>
             </View>
             </View>
-            <View style = {styles.bottomContainer}>
+            <View style = { this.state.showIntorBar ? styles.bottomContainer : styles.bottomContainerExtended}>
                 <this.renderMembersList />
             </View>
             <View style = {styles.bottomButtonContainer}>
@@ -152,15 +180,29 @@ export default class InviteComplete extends Component {
                     text = {"INVITE NEW MEMBER" } 
                     action = {()=>this.OnPressInviteNewMember()} />
             </View>
-            {this.state.sendingInvite ? <CustomPopup
+            {this.props.invitingSingleMember ? <CustomPopup
                 type = {PopupType.Loading}
-                popupOpen = {this.state.sendingInvite}
-                loadingText = "Sending Invite"
+                popupOpen = {this.state.invitingSingleMember}
+                loadingText = "Resending Invite"
             /> : null }
         </View>
         )
     }
 }
+const mapStateToProps = state => {
+    return{
+        invitingSingleMember : state.team.invitingSingleMember,
+        memberData : state.team.memberData,
+        error : state.team.error,
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onInviteMember : (memberData) =>
+            dispatch(IniviteSingleTeamMember(memberData))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(InviteComplete)
 const styles = StyleSheet.create({
     container: {
         flex : 1,
@@ -328,5 +370,11 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0,
         color: "#4a90e2"
+    },
+    bottomContainerExtended : {
+        flex : 0.71,
+        backgroundColor : "transparent",
+        justifyContent : "center",
+        alignItems : "center",
     }
 })
