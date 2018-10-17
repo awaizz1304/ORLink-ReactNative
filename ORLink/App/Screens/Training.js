@@ -125,11 +125,11 @@ class Training extends Component {
                 <View style = {styles.listContainer}>
                     <this.renderVideosList />
                 </View>
-                {this.props.loadingVideos ? <CustomPopup
+                {/* {this.props.loadingVideos ? <CustomPopup
                     type = {PopupType.Loading}
                     loadingText = "Getting videos list"
                     popupOpen = {this.props.loadingVideos}
-                /> : null }
+                /> : null } */}
             </View>
         )
     }

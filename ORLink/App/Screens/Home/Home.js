@@ -9,7 +9,7 @@ import { StyleSheet, View } from 'react-native';
 // Importing Sub Components
 import Title from './Sub Components/Title'
 import WelcomeTitle from './Sub Components/WelcomeTitle'
-import Navigation from '../../UIComponents/Navigation Bar/Navigation'
+// import Navigation from '../../UIComponents/Navigation Bar/Navigation'
 import NoProcedures from './Sub Components/NoProcedures'
 
 // Importing Custom Modules
@@ -18,10 +18,9 @@ import ClientLayer from '../../Components/Layers/ClientLayer';
 class Home extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-
-        }
+        this.tab
     }
+
     componentDidMount() {
 
     }
@@ -41,9 +40,6 @@ class Home extends Component {
 
                 {/* No Procedures */}
                 <NoProcedures />
-
-                {/* Bottom Bar */}
-                <Navigation />
 
             </View>
         )

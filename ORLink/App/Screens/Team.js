@@ -107,11 +107,11 @@ class Team extends Component {
                 <View style = {styles.listContainer}>
                     <this.renderList />
                 </View>
-            {this.props.loadingData ?<CustomPopup 
+            {/* {this.props.loadingData ?<CustomPopup 
                 type = {PopupType.Loading}
                 loadingText = "Getting teams"
                 popupOpen = {this.props.loadingData}
-            /> : null }
+            /> : null } */}
             </View>
         )
     }
