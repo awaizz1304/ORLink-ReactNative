@@ -59,7 +59,7 @@ class Procedure extends Component {
 
                             {/* <ProcedureItem /> */}
                             <FlatList
-                                data={[{},{},{},{}]}
+                                data={[{key:1},{key:2},{key:3},{key:4}]}
                                 renderItem={ProcedureItem}
                             />
 

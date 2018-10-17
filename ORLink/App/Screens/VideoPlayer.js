@@ -32,8 +32,8 @@ class VideoPlayer extends Component {
         this.props.navigation.goBack()
     }
     OnPressPlayVideo = () => {
-        this.setState({videoPaused : false})
-        this.Player.presentFullscreenPlayer()
+        this.setState({videoPaused : !this.state.videoPaused})
+        this.state.videoPaused ? this.Player.presentFullscreenPlayer() : this.Player.dismissFullscreenPlayer()
     }
     OnVideoPlayerDismissed = () => {
         this.setState({videoPaused : true})
@@ -46,7 +46,7 @@ class VideoPlayer extends Component {
         if(this.state.videoLoaded){
             return(
                 <TouchableOpacity onPress = {this.OnPressPlayVideo}>
-                <Image style = {styles.playIcon} source = {require('../assets/Common/PlayIcon/group3x.png')} />
+                <Image style = {styles.playIcon} source = {require('../assets/Common/PlayIcon/group.png')} />
                 </TouchableOpacity>
             )
         }
@@ -73,6 +73,7 @@ class VideoPlayer extends Component {
                     />
                 </View>
                 <View style = {styles.videoPlayerContainer}>
+                <TouchableOpacity onPress = {this.OnPressPlayVideo} >
                     <Video
                         source = {{uri : this.state.url}}
                         style = {styles.videoPlayer}
@@ -82,18 +83,24 @@ class VideoPlayer extends Component {
                         onFullscreenPlayerDidDismiss = {this.OnVideoPlayerDismissed}
                         ref = {(player) => this.Player = player}
                     >
-                    <TouchableOpacity onPress = {this.OnPressPlayVideo} />
+                    
+                    <Image  />
+                    
                     </Video>
+                    </TouchableOpacity>
                 </View>
+                <TouchableOpacity onPress = {this.OnPressPlayVideo} >
+                        <Text>Play</Text>
+                    </TouchableOpacity>
                 <View style = {styles.desciptionUpperContentContainer}>
                     <View style = {styles.descriptionFirstLine}>
                     <Text style = {styles.videoName}>{this.state.name}</Text>
                     <View style = {styles.socialIconContainer}>
                         <TouchableOpacity>
-                        <Image source = {require('../assets/Common/ShareIcon/share3x.png')} />
+                        <Image style = {styles.iconShare} source = {require('../assets/Common/ShareIcon/share.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity>
-                        <Image source = {require('../assets/Common/LikeIcon/heart3x.png')} />
+                        <Image style = {styles.iconLike} source = {require('../assets/Common/LikeIcon/heart.png')} />
                         </TouchableOpacity>
                     </View>
                     </View>
@@ -145,8 +152,9 @@ const styles = StyleSheet.create({
         backgroundColor : "#000"
     },
     playIcon : {
-        width: WScale(64),
-        height: WScale(64),
+        width: WScale(32),
+        height: WScale(32),
+        zIndex : 100,
     },
     descriptionFirstLine : {
         
@@ -157,7 +165,7 @@ const styles = StyleSheet.create({
     socialIconContainer : {
         flexDirection : 'row',
         justifyContent : 'space-between',
-        width : WScale(80)
+        width : WScale(50)
     },
     videoName : {
         width: WScale(103),
@@ -199,4 +207,12 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         color: "#929292"
     },
+    iconShare : {
+        width: WScale(17),
+        height: WScale(18)
+    },
+    iconLike : {
+        width: WScale(20),
+        height: WScale(18)
+    }
 })

@@ -17,7 +17,8 @@ class Team extends Component {
     constructor(props){
         super(props)
         this.state = {
-            teamsList : []
+            teamsList : [],
+            refershing : false
         }
     }
     componentDidMount () {
@@ -26,9 +27,18 @@ class Team extends Component {
     componentDidUpdate () {
         if(this.props.teamsList != null){
             if(this.state.teamsList.length == 0){
-                this.setState({teamsList : this.props.teamsList})
+                this.setState({teamsList : this.props.teamsList,refershing : false})
             }
         }
+    }
+    refershList = () =>{
+        this.setState({refershing : true})
+        this.props.onGetTeams()
+    }
+    OnPressAddNewTeam = () => {
+        this.props.navigation.navigate('CreateTeam',{
+            introBar : false,
+        })
     }
     OnPressTeamItem = (item) => {
         this.props.navigation.navigate('InviteCompleteScreen',{
@@ -73,6 +83,8 @@ class Team extends Component {
                 scrollsToTop = {false}
                 data = {this.state.teamsList}
                 extraData={this.state}
+                onRefresh = {this.refershList}
+                refreshing = {this.state.refershing}
                 renderItem={({item,index}) =>
                     <CustomListItem
                         content = {<this.ListItem item = {item} index = {index}/>}
@@ -92,7 +104,7 @@ class Team extends Component {
                     />
                 </View>
                 <View style = {styles.upperContainer}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress = {this.OnPressAddNewTeam}>
                     <View style = {styles.addButtonContainer}>
                             <Image style = {styles.addIcon} source = {require('../assets/Common/AddButton/add.png')} />
                             <Text style = {styles.addTeamText}>Add new team</Text>
@@ -102,11 +114,11 @@ class Team extends Component {
                 <View style = {styles.listContainer}>
                     <this.renderList />
                 </View>
-            {/* {this.props.loadingData ?<CustomPopup 
+                {this.props.loadingData && !this.state.refershing ?<CustomPopup 
                 type = {PopupType.Loading}
                 loadingText = "Getting teams"
                 popupOpen = {this.props.loadingData}
-            /> : null } */}
+                /> : null }
             </View>
         )
     }
@@ -190,9 +202,9 @@ const styles = StyleSheet.create({
         backgroundColor : "#fff",
         shadowOpacity: 0.1,
         shadowRadius : 10,
-        elevation : 5,
-        marginTop : WScale(12),
-        
+        elevation : 8,
+        marginTop : WScale(5),
+        marginBottom : WScale(12),
         justifyContent : 'flex-start',
         alignItems : 'center',
         flexDirection : 'row',

@@ -42,8 +42,11 @@ class InviteComplete extends Component {
         })
         fromCreateTeamScreen = true
     }
-    OnPressHome () {
+    OnPressBack () {
         this.props.navigation.goBack()
+    }
+    OnPressHome () {
+        
     }
     OnPressInviteNewMember () {
         this.props.navigation.state.params.returnData()
@@ -153,7 +156,7 @@ class InviteComplete extends Component {
             <TopComponent
                 heading = {this.state.teamData == null ? "" : this.state.teamData.name}
                 leftButton = {this.state.showIntorBar ? "Home" : "Back"}
-                leftButtonAction = {()=>this.OnPressHome()}
+                leftButtonAction = {this.state.showIntorBar ? () => this.OnPressHome() : ()=> this.OnPressBack()}
                 rightButton = ""
                 rightButtonAction = {null}
             />
@@ -163,7 +166,7 @@ class InviteComplete extends Component {
             <View style = {styles.middleContentContainer}>
                 <Text style = {styles.textDocs}>
                     <Text>Created on : </Text>
-                    <Text>{this.state.teamCreationDate}</Text>
+                    <Text>{this.state.teamData == null ? "" : this.state.teamData.creationTime}</Text>
                 </Text>
                 <Text style = {styles.textDocs}>
                     <Text>{this.state.data.length}</Text>
@@ -271,6 +274,7 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
     },
     bottomContainer : {
+        marginTop : WScale(7),
         flex : 0.46,
         backgroundColor : "transparent",
         justifyContent : "center",
@@ -299,8 +303,9 @@ const styles = StyleSheet.create({
         backgroundColor : "#fff",
         shadowOpacity: 0.1,
         shadowRadius : 10,
-        elevation : 3,
-        marginTop : WScale(10),
+        elevation : 8,
+        marginTop : WScale(5),
+        marginBottom : WScale(12),
         
         justifyContent : 'flex-start',
         alignItems : 'center',

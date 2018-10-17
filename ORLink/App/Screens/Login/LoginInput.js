@@ -12,7 +12,7 @@ import { Checkbox } from '../../UIComponents/Checkbox'
 
 // Third Parties Dependencies.
 import  Textinput  from 'react-native-material-textinput'
-
+import CustomButton, { ButtonType } from '../../UIComponents/CustomButton'
 
 
 class LoginInput extends Component {
@@ -113,14 +113,7 @@ class LoginInput extends Component {
                         </View>
                     </View>
                     {/* Login Button */}
-                    <TouchableOpacity style={styles.loginButton} onPress={this.ValidateAndForwardSubmission}>
-                        <View style={styles.loginButtonView}>
-                            {/* Text Component */}
-                            <Text style={styles.loginButtonText}>
-                                LOGIN
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
+                    <CustomButton text = "LOGIN" action = {()=>this.ValidateAndForwardSubmission()} type = {ButtonType.BigBlueButton}/>
                     {/* New user signup & terms/conditions */}
                     <View style={styles.STFields}>
                         {/* Fields container */}

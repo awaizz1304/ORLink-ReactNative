@@ -7,6 +7,7 @@ import ClientLayer from '../Components/Layers/ClientLayer';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -37,15 +38,20 @@ class LandingPage extends Component {
               activeDot={<View style={styles.activeDotSyle} />}
               >
                 <View style={styles.slide1}>
+                    <View style = {styles.textContainer}>
                     <Image style = {styles.logoImage} source = {require('../assets/Common/ORlinkIcon_black/bitmapCopy.png')} />
                     <Text style = {styles.boldTextStyle}>9000+</Text>
                     <Text style = {styles.textStyle}>Surgical Professionals {"\n"}are using Orlink for{"\n"}collaboration</Text>
+                    </View>
+                    <View style = {styles.imageConatiner}>
+                    <Image style = {styles.imageStyle} source = {require('../assets/LandingPage/undrawDoctorKw5L.png')}></Image>
+                    </View>
                 </View>
                 <View style={styles.slide2}>
-                <Text style={styles.text}>Image 2</Text>
+                <Text style={styles.text}>Slide 2</Text>
                 </View>
                 <View style={styles.slide3}>
-                <Text style={styles.text}>Image 3</Text>
+                <Text style={styles.text}>Slide 3</Text>
                 </View>
               </Swiper>
           </View>
@@ -58,7 +64,6 @@ class LandingPage extends Component {
                 <Text style = {styles.signInText}>Sign In</Text>
               </TouchableOpacity>
             </View>
-            <View></View>
             <TouchableOpacity>
               <Text style = {styles.termsAndConditionsText}>Terms & Conditions</Text>
             </TouchableOpacity>
@@ -93,11 +98,11 @@ export default connect(mapStateToProps,mapDispatchToProps)(LandingPage)
 
 const styles = StyleSheet.create({
     swiperContainer: {
-      // width : window.width,
+      width : window.width,
       height : '100%',
       flex : 0.675,
-      marginTop : (Platform.OS == 'ios') ? 8 : 0,
-      backgroundColor : '#92BBD9',
+      marginTop : (Platform.OS == 'ios') ? (isIphoneX() ? 32 : 18) : 0,
+      backgroundColor : 'red',
     },
     swiperPaginationStyle: {
       bottom: -23,
@@ -106,11 +111,20 @@ const styles = StyleSheet.create({
       flex : 1,
       backgroundColor: '#F5FCFF',
       justifyContent : 'center',
-      alignItems : 'center'
+      // alignItems : 'center'
     },
     slide1: {
       flex: 1,
       backgroundColor: 'rgb(12,192,176)',
+      
+    },
+    textContainer : {
+      flex : 0.5,
+    },
+    imageConatiner : {
+      flex : 0.5,
+      justifyContent : 'center',
+      alignItems :'center'
     },
     slide2: {
       flex: 1,
@@ -130,12 +144,13 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     middleContainer: {
-      flex : 0.08
+      flex : 0.08,
     },
     bottomContainer : {
-      flex : 0.20,
+      flex : isIphoneX() ? 0.2 : 0.245,
       alignItems : 'center',
-      justifyContent : 'space-between'
+      justifyContent : 'space-between',
+      
     },
     dotsStyle : {
       backgroundColor: '#fff', 
@@ -206,7 +221,7 @@ const styles = StyleSheet.create({
       color: "#a6a6a6"
     },
     logoImage : {
-      marginTop : WScale(28),
+      marginTop : WScale(35),
       marginLeft : WScale(30),
       width: WScale(76),
       height: WScale(15),
@@ -231,5 +246,10 @@ const styles = StyleSheet.create({
       fontStyle: "normal",
       letterSpacing: 0,
       color: "#ffffff"
+    },
+    imageStyle : {
+      flex : 1,
+      width: WScale(313),
+      height: WScale(218),
     }
   });

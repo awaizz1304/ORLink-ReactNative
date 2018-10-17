@@ -35,7 +35,7 @@ export const resume = (app_data) =>
             ClientLayer.getInstance().getDataManager().SaveValueForKey(APP_DATA,JSON.stringify({USER_LAUNCH_COUNT:1}))
 
             // Routing application to landing page.
-            setTimeout(() => dispatch(landing(1,'LandingPage')),5000)
+            setTimeout(() => dispatch(landing(1,'LandingPage')),2000)
 
         }
         else
@@ -55,7 +55,7 @@ export const resume = (app_data) =>
             else
             {
                 // Route to login
-                setTimeout(() => dispatch(login(DATA.USER_LAUNCH_COUNT,'Login')),5000)
+                setTimeout(() => dispatch(login(DATA.USER_LAUNCH_COUNT,'Login')),2000)
             }
 
             // Saving Data Unless/Until Data is changes which will change,

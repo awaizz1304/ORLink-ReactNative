@@ -1,27 +1,29 @@
 import React , {Component} from 'react'
-import {Platform, StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback,Image} from 'react-native';
 import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import { getInitials } from '../Components/Utilities/Utilities';
 import { InviteType } from '../Components/Services/DataService/DataModels/TeamMemberDataModel';
 import { Switch } from 'react-native-switch';
-
+import { isIphoneX } from "react-native-iphone-x-helper";
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
 
-const TopComponent = ({heading,leftButton,rightButton,leftButtonAction,rightButtonAction}) =>{
+const TopComponent = ({heading,leftButton,leftImage,rightButton,rightImage,leftButtonAction,rightButtonAction}) =>{
     return(
         <View style = {styles.container}>
         <View style = {styles.topBarContentContainer}>
             <View style = {styles.topBarButtonContainer}>
             <TouchableOpacity onPress = {leftButtonAction}>
-                <Text style = {styles.backText}>{leftButton}</Text>
+                {leftImage == null ? <Text style = {styles.backText}>{leftButton}</Text> : leftImage
+                }
             </TouchableOpacity>
             </View>
             <Text style = {styles.headingText}>{heading}</Text>
             <View style = {styles.topBarButtonContainer}>
             <TouchableOpacity onPress = {rightButtonAction}>
-                <Text style = {styles.backText}>{rightButton}</Text>
+                {rightImage == null ? <Text style = {styles.backText}>{rightButton}</Text> : rightImage
+                     }
             </TouchableOpacity>
             </View>
         </View>
@@ -44,10 +46,10 @@ const styles = StyleSheet.create({
     },
     topBarContentContainer : {
         width : window.width * 0.95,
-        marginTop : Platform.OS == 'ios' ? 8 : 0,
+        marginTop : (Platform.OS == 'ios') ? (isIphoneX() ? 14 : 8) : 0,
         flexDirection : 'row',
         justifyContent : 'space-between',
-        alignItems : "center"
+        alignItems : "center",
     },
     backText : {
         fontFamily: "Avenir",
@@ -67,6 +69,11 @@ const styles = StyleSheet.create({
         color: "#020202"
     },
     topBarButtonContainer : {
-        width : 50,
+        width : WScale(35),
+        alignItems : 'center'
     },
+    icon : {
+        width : WScale(17),
+        height : WScale(17),
+    }
 })
