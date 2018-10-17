@@ -196,6 +196,7 @@ class SignupInputs extends Component {
                                 color="#4a4a4a"
                                 paddingBottom={WScale(25)}
                                 marginBottom={WScale(27)}
+                                password={true}
                                 error={this.state.Epassword}
                                 onChangeText={password => this.setState({password})}
                             />
@@ -217,6 +218,7 @@ class SignupInputs extends Component {
                                 color="#4a4a4a"
                                 paddingBottom={WScale(25)}
                                 marginBottom={WScale(27)}
+                                password={true}
                                 error={this.state.Ecpassowrd}
                                 onChangeText={confirmPassword => this.setState({confirmPassword})}
                             />

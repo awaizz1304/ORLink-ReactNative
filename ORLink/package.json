@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "material-ui-toggle-icon": "^1.0.1",
     "react": "16.5.0",
     "react-native": "0.57.0",
     "react-native-checkbox-component": "^1.0.3",
