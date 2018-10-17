@@ -19,7 +19,7 @@ import Session from '../../Components/Common/Session'
 // Sub Components
 import TopHeading from './TopHeading'
 import Logininput from './LoginInput'
-
+import CustomPopup, { PopupType } from '../../UIComponents/CustomPopup'
 // Creating Statefull Component.
 class Login extends Component
 {
@@ -79,7 +79,11 @@ class Login extends Component
 
                 {/* Input Fields Component */}
                 <Logininput login={this.MakeLoginRequest} navigateToSignup={this.navigateToSignup}/>
-                
+            {this.props.logging_flag ? <CustomPopup
+                type = {PopupType.Loading}
+                loadingText = "Logging In"
+                popupOpen = {this.props.logging_flag}
+            /> : null }
             </View>
         )
     }

@@ -17,7 +17,8 @@ class Team extends Component {
     constructor(props){
         super(props)
         this.state = {
-            teamsList : []
+            teamsList : [],
+            refershing : false
         }
     }
     componentDidMount () {
@@ -26,9 +27,13 @@ class Team extends Component {
     componentDidUpdate () {
         if(this.props.teamsList != null){
             if(this.state.teamsList.length == 0){
-                this.setState({teamsList : this.props.teamsList})
+                this.setState({teamsList : this.props.teamsList,refershing : false})
             }
         }
+    }
+    refershList = () =>{
+        this.setState({refershing : true})
+        this.props.onGetTeams()
     }
     OnPressAddNewTeam = () => {
         this.props.navigation.navigate('CreateTeam',{
@@ -78,6 +83,8 @@ class Team extends Component {
                 scrollsToTop = {false}
                 data = {this.state.teamsList}
                 extraData={this.state}
+                onRefresh = {this.refershList}
+                refreshing = {this.state.refershing}
                 renderItem={({item,index}) =>
                     <CustomListItem
                         content = {<this.ListItem item = {item} index = {index}/>}
@@ -107,11 +114,11 @@ class Team extends Component {
                 <View style = {styles.listContainer}>
                     <this.renderList />
                 </View>
-            {/* {this.props.loadingData ?<CustomPopup 
+                {this.props.loadingData && !this.state.refershing ?<CustomPopup 
                 type = {PopupType.Loading}
                 loadingText = "Getting teams"
                 popupOpen = {this.props.loadingData}
-            /> : null } */}
+                /> : null }
             </View>
         )
     }

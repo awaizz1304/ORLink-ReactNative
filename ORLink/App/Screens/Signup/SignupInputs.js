@@ -15,7 +15,7 @@ import { WScale, HScale } from '../../Modules/Multi-Resolution/MultiResolution'
 import Textinput from 'react-native-material-textinput'
 import { Dropdown } from 'react-native-material-dropdown'
 import PasswordInputText from 'react-native-hide-show-password-input'
-
+import CustomButton, { ButtonType } from '../../UIComponents/CustomButton'
 class SignupInputs extends Component {
 
     // State Variables.
@@ -279,17 +279,7 @@ class SignupInputs extends Component {
 
                 {/* Button Container  */}
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonTouchable} onPress={this.processSignup}>
-                        {/* Login Button */}
-                        <View style={styles.buttonLooks}>
-
-                            {/* Text Component */}
-                            <Text style={styles.buttonText}>
-                                SIGN UP
-                            </Text>
-
-                        </View>
-                    </TouchableOpacity>
+                    <CustomButton text = "SIGN UP" action = {()=>this.processSignup()} type = {ButtonType.BigBlueButton}/>
                 </View>
 
             </View>
@@ -310,7 +300,7 @@ const styles = StyleSheet.create({
     loginTextInput: { width: '85%' },
     termsContainer: { width: "85%", flexDirection: "column", marginTop: WScale(33) },
     termsContainerContent: { flexDirection: "row", justifyContent: "space-between", paddingTop: WScale(16.5), paddingBottom: WScale(36) },
-    buttonContainer: { flexDirection: "row", justifyContent: "center" },
+    buttonContainer: { height : WScale(50), justifyContent: "center",alignItems : 'center'},
     buttonLooks: {
         width: '100%',
         height: WScale(45),

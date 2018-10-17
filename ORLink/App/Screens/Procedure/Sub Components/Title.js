@@ -5,19 +5,17 @@
 // Importing required components
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
-
+import TopComponent from '../../../UIComponents/TopComponent'
 // Importing Custom Modules
 import { WScale, HScale } from '../../../Modules/Multi-Resolution/MultiResolution'
 
 // Component body
 const Title = (props) => {
     return (
-        // Rendering top bar container
-        <View style={styles.topBarContainer}>
-
-            {/* Heading */}
-            <Text style={styles.headingStyle}>Procedure</Text>
-
+        <View style = {styles.topBarContainer}>
+            <TopComponent
+                heading = "Procedure"
+            />
         </View>
     )
 }
@@ -29,17 +27,7 @@ export default Title;
 const styles = StyleSheet.create({
     topBarContainer:
     {
-        height: WScale(48),
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        shadowOffset: { width: 0, height: 2.5, },
-        shadowColor: 'black',
-        backgroundColor: "#fff",
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-        elevation: 3,
-        backgroundColor: "#ffffff"
+        flex : 0.135,
     },
     headingStyle:
     {

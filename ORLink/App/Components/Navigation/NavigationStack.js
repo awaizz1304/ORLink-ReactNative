@@ -11,7 +11,8 @@ import Splash from '../../Screens/Splash/Splash';
 import VideoPlayer from '../../Screens/VideoPlayer'
 import ChangePassword from '../../Screens/ChangePassword';
 import Signup from "../../Screens/Signup/Signup";
-import Root from '../../UIComponents/Navigation Bar/Navigation'
+import HomeNavigator from '../../UIComponents/Navigation Bar/BottomNavigator'
+import Team from '../../Screens/Team';
 
 export const NavigationStack = StackNavigator({
     Splash: { screen: Splash },
@@ -22,12 +23,13 @@ export const NavigationStack = StackNavigator({
     CreateTeam : {screen : CreateTeam},
     InviteMemberScreen : {screen : InviteMember},
     InviteCompleteScreen : {screen : InviteComplete},
-    Root : {screen : Root},
+    HomeNavigator : {screen : HomeNavigator},
     VideoPlayerScreen : {screen : VideoPlayer},
     ChangePasswordScreen : {screen : ChangePassword},
+    TeamScreen : {screen : Team}
 },{
     headerMode : 'none',
-    initialRouteName : 'CreateTeam',
+    initialRouteName : 'Splash',
 
 });
 

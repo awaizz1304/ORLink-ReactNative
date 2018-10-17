@@ -6,7 +6,7 @@
 import React from 'react'
 
 // Importing Navigation Component
-import { TabNavigator, TabBarBottom } from 'react-navigation'
+import { TabNavigator, TabBarBottom,createBottomTabNavigator } from 'react-navigation'
 
 
 // Importing Tabar Navigation Screens
@@ -20,7 +20,7 @@ import Procedure from '../../Screens/Procedure/Procedure'
 import Item from './Sub Components/Item'
 
 // Exporting Component
-export default Navigation = TabNavigator(
+export default Navigation = createBottomTabNavigator(
     {
         Home: { screen: Home },
         Procedure: { screen: Procedure },
@@ -49,15 +49,13 @@ export default Navigation = TabNavigator(
                 },
             }),
         order: ["Home","Procedure","Team","Training","Profile"],
-        tabBarComponent: TabBarBottom,
-        tabBarPosition: "bottom",
         tabBarOptions:
         {
             activeTintColor: "#4a90e2",
             inactiveTintColor: "#a6a6a6",
             showLabel:false
         },
-    
+        lazy : true,
         animationEnabled: true,
         swipeEnabled: true
     }

@@ -8,7 +8,7 @@ import VideoDataModel from '../Components/Services/DataService/DataModels/VideoD
 import { connect } from 'react-redux'
 import { getAllVideos , loadingVideos} from '../Store/Actions/DataFetch/videosFetch';
 import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
-
+import Icon from 'react-native-vector-icons/EvilIcons'
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
@@ -20,14 +20,16 @@ class Training extends Component {
         super(props)
         this.state = {
             videosData : null,
-            value : false
+            value : false,
+            refershing : false
         }
     }
     componentDidUpdate(){
         if(this.state.videosData != this.props.videosData)
-            this.setState({videosData : this.props.videosData})
+            this.setState({videosData : this.props.videosData,refershing : false})
     }
     componentDidMount () {
+        console.log("componentDidMount training")
         // videoData = new VideoDataModel()
         // videoData.name = "AngioPlasty"
         // videoData.category = "Heart Operation"
@@ -38,6 +40,10 @@ class Training extends Component {
 
         // this.setState({videosData : this.dummyVideosData })
 
+        this.props.onGetAllVideos()
+    }
+    refershList = () =>{
+        this.setState({refershing : true})
         this.props.onGetAllVideos()
     }
     OnPressMovieItem(item)  {
@@ -86,6 +92,8 @@ class Training extends Component {
             scrollsToTop = {false}
             data = {this.state.videosData}
             extraData={this.state}
+            onRefresh = {this.refershList}
+            refreshing = {this.state.refershing}
             renderItem={({item,index}) =>
                 <CustomListItem
                  content = {<this.ListItem item = {item} index = {index}/>}
@@ -106,11 +114,14 @@ class Training extends Component {
                 <View style = {styles.emptyArea}/>
                 <View style = {styles.searchArea}>
                     <View style = {styles.searchAreaContent}>
+                        <View style = {styles.seachBar} >
                         <TextInput
                             style = {styles.searchInput}
                             placeholder = "Search Videos"
                             onChangeText = {(text) => this.searchFilterFunction(text)}
                         />
+                        <Icon style={styles.searchIcon} name="search" size={WScale(9 * 2)} />
+                        </View>
                         <TouchableOpacity>
                         <View style = {styles.filterIconContainer}>
                             <Image style = {styles.filerIcon} source = {(require('../assets/Common/FilterIcon/filterCopy3x.png'))} />
@@ -125,11 +136,11 @@ class Training extends Component {
                 <View style = {styles.listContainer}>
                     <this.renderVideosList />
                 </View>
-                {/* {this.props.loadingVideos ? <CustomPopup
+                {this.props.loadingVideos && !this.state.refershing ? <CustomPopup
                     type = {PopupType.Loading}
                     loadingText = "Getting videos list"
                     popupOpen = {this.props.loadingVideos}
-                /> : null } */}
+                /> : null }
             </View>
         )
     }
@@ -179,6 +190,13 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderWidth: WScale(1),
         borderColor: "#e8e8e8",
+        paddingLeft: WScale(15.5 * 2),
+        paddingRight: WScale(16 * 2),
+    },
+    searchIcon : {
+        position: "absolute",
+        zIndex: 1,
+        right: WScale(4.5 * 2)
     },
     filterText : {
         width: WScale(36),
@@ -289,5 +307,9 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0,
         color: "#4a4a4a"
+    },
+    seachBar : {
+        justifyContent : 'center',
+        alignItems  :'center'
     }
 })

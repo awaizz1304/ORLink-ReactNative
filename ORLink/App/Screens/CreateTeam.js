@@ -28,7 +28,7 @@ class CreateTeam extends Component {
     }
     componentDidMount () {
         this.props.onInitialize()
-        const showIntroBar = this.props.navigation.getParam('introBar')
+        const showIntroBar = this.props.navigation.getParam('introBar',true)
         this.setState({showIntroBar : showIntroBar})
     }
     componentDidUpdate () {
