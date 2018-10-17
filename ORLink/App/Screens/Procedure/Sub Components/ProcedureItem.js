@@ -26,7 +26,10 @@ const ProcedureItem = (props) => {
                 <View style={styles.pData}>
                     <Text style={styles.procdureType}>Foot Surgery</Text>
                     <Text style={styles.attendeName}>Dr. Jason Harris</Text>
-                    <Badges color="#966c26" status="Draft" />
+
+                    <View style={{flexDirection:"row",justifyContent:"flex-start"}}>
+                        <Badges color="#966c26" status="Draft" />
+                    </View>
 
                     {/* Data and Download */}
                     <View style={styles.dateNdownload}>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     {
         width: WScale(32.5 * 2),
         height: WScale(32.5 * 2),
-        borderRadius: 100,
+        borderRadius: WScale(32.5 * 2) / 2,
         marginTop: WScale(8.5 * 2)
     },
     procdureType:

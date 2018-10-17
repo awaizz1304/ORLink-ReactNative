@@ -12,7 +12,7 @@ import { WScale, HScale } from '../../Modules/Multi-Resolution/MultiResolution'
 // Concrete Implementation.
 const Badges = (props) => {
     return (
-        <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+        <View style={{ flexDirection: "row", justifyContent: "center",alignItems:"center",borderRadius:100,backgroundColor:props.color }}>
             <Text style={
                 {
                     fontSize: WScale(4 * 2),
@@ -20,10 +20,8 @@ const Badges = (props) => {
                     fontStyle: "normal",
                     letterSpacing: 1,
                     color: "#ffffff",
-                    borderRadius: 70,
                     paddingHorizontal: WScale(5.5 * 2),
-                    paddingVertical: WScale(1.5 * 2),
-                    backgroundColor:props.color
+                    paddingVertical: WScale(1.5 * 2)
                 }
             }>
                 {props.status}

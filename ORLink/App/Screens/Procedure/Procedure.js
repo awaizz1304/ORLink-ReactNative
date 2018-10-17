@@ -5,7 +5,7 @@
 
 // Importing React Core Components
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView,FlatList } from 'react-native'
 
 // Importing Sub Components
 import Title from './Sub Components/Title'
@@ -57,7 +57,11 @@ class Procedure extends Component {
                         <View style={styles.scrollViewContainer}>
                             {/* TODO! Need to update it to flat list */}
 
-                            <ProcedureItem />
+                            {/* <ProcedureItem /> */}
+                            <FlatList
+                                data={[{},{},{},{}]}
+                                renderItem={ProcedureItem}
+                            />
 
                         </View>
 
