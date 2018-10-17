@@ -38,8 +38,8 @@ class InviteMember extends Component {
             invalidEmail : false,
             invalidPhone : false,
             teamData : null,
-            showIntroTopBar : true,
-            responseData : null
+            showIntroTopBar : false,
+            responseData : null,
         }
     }
     componentDidMount () {
@@ -59,7 +59,8 @@ class InviteMember extends Component {
         })
         
         const teamData = this.props.navigation.getParam('data',null)
-        this.setState({teamData : teamData})
+        const showIntroBar = this.props.navigation.getParam('introBar',true)
+        this.setState({teamData : teamData,showIntroBar : showIntroBar})
     }
     componentDidUpdate () {
         if(this.props.membersData != null){
@@ -98,6 +99,7 @@ class InviteMember extends Component {
     }
 
     OnPressBack = () => {
+        this.props.navigation.state.params.returnFunction()
         this.props.navigation.goBack()
     }
     OnPressAdd = () => {
@@ -436,12 +438,14 @@ const styles = StyleSheet.create({
         color : "#fff"
     },
     bottomContainer : {
+        marginTop : WScale(7),
         flex : 0.26,
         backgroundColor : 'transparent',
         justifyContent : "center",
         alignItems : "center",
     },
     bottomButtonContainerExtended : {
+        marginTop : WScale(7),
         flex : 0.41,
         backgroundColor : 'transparent',
         justifyContent : "center",
@@ -452,19 +456,19 @@ const styles = StyleSheet.create({
         alignItems : 'center',
     },
     input : {
-        marginTop : WScale(8),
+        marginTop : WScale(5),
+        paddingBottom : 0,
         borderBottomWidth: 1.5,
         borderColor : "#d3dfef"
     },
     invalidInput : {
-        marginTop : WScale(8),
+        marginTop : WScale(5),
         borderBottomWidth: 1.5, 
         borderColor : 'red'
     },
     listItemContiner : {
         justifyContent : "center",
         alignItems : "center",
-        
     },
     listItemInnerContiner :{
         width : window.width * 0.9,
@@ -480,9 +484,9 @@ const styles = StyleSheet.create({
         backgroundColor : "#fff",
         shadowOpacity: 0.1,
         shadowRadius : 10,
-        elevation : 3,
-        marginTop : WScale(10),
-        
+        elevation : 8,
+        marginTop : WScale(5),
+        marginBottom : WScale(12),
         justifyContent : 'flex-start',
         alignItems : 'center',
         flexDirection : 'row',

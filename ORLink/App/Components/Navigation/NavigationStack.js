@@ -35,7 +35,7 @@ export const NavigationStack = createStackNavigator({
     Profile: { screen: Profile }
 },{
     headerMode : 'none',
-    initialRouteName : 'TeamScreen',
+    initialRouteName : 'CreateTeam',
 });
 
 

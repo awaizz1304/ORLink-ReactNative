@@ -1,5 +1,6 @@
 import React , {Component} from 'react'
 import {StyleSheet, Text, View, TouchableOpacity,ActivityIndicator} from 'react-native';
+import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -40,9 +41,9 @@ const styles = StyleSheet.create ({
         alignItems : "center",
     },
     countContainer : {
-        width : 70,
-        height : 70,
-        borderRadius : 35,
+        width : WScale(70),
+        height : WScale(70),
+        borderRadius : WScale(35),
         backgroundColor: "#ffffff",
         borderStyle: "solid",
         borderWidth: 1,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create ({
         alignItems : "center",
     },
     countTextBold : {
-        fontSize: 20,
+        fontSize: WScale(20),
     },
     countText : {
         fontFamily: "Avenir",
@@ -59,11 +60,11 @@ const styles = StyleSheet.create ({
         fontStyle: "normal",
         letterSpacing: 0,
         color: "#0ac8b8",
-        fontSize : 16,
+        fontSize : WScale(16),
     },
     instructionText : {
         fontFamily: "Avenir",
-        fontSize: 20,
+        fontSize: WScale(20),
         fontWeight: "300",
         fontStyle: "normal",
         lineHeight: 26,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create ({
         textAlignVertical : "bottom",
     },
     emptyView : {
-        width : 45,
+        width : WScale(45),
     },
     
 })

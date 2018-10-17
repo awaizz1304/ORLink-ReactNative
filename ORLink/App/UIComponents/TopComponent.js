@@ -4,7 +4,7 @@ import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import { getInitials } from '../Components/Utilities/Utilities';
 import { InviteType } from '../Components/Services/DataService/DataModels/TeamMemberDataModel';
 import { Switch } from 'react-native-switch';
-
+import { isIphoneX } from "react-native-iphone-x-helper";
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     topBarContentContainer : {
         width : window.width * 0.95,
-        marginTop : Platform.OS == 'ios' ? 8 : 0,
+        marginTop : (Platform.OS == 'ios') ? (isIphoneX() ? 14 : 8) : 0,
         flexDirection : 'row',
         justifyContent : 'space-between',
         alignItems : "center"

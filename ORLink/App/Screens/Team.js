@@ -30,6 +30,11 @@ class Team extends Component {
             }
         }
     }
+    OnPressAddNewTeam = () => {
+        this.props.navigation.navigate('CreateTeam',{
+            introBar : false,
+        })
+    }
     OnPressTeamItem = (item) => {
         this.props.navigation.navigate('InviteCompleteScreen',{
             membersData : item.members,
@@ -92,7 +97,7 @@ class Team extends Component {
                     />
                 </View>
                 <View style = {styles.upperContainer}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress = {this.OnPressAddNewTeam}>
                     <View style = {styles.addButtonContainer}>
                             <Image style = {styles.addIcon} source = {require('../assets/Common/AddButton/add.png')} />
                             <Text style = {styles.addTeamText}>Add new team</Text>
@@ -190,9 +195,9 @@ const styles = StyleSheet.create({
         backgroundColor : "#fff",
         shadowOpacity: 0.1,
         shadowRadius : 10,
-        elevation : 5,
-        marginTop : WScale(12),
-        
+        elevation : 8,
+        marginTop : WScale(5),
+        marginBottom : WScale(12),
         justifyContent : 'flex-start',
         alignItems : 'center',
         flexDirection : 'row',

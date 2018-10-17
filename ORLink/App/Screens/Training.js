@@ -218,6 +218,7 @@ const styles = StyleSheet.create({
     },
     listContainer : {
         flex : 0.714,
+        marginTop : WScale(10)
     },
     listItem : {
         width : window.width * 0.9,
@@ -229,8 +230,9 @@ const styles = StyleSheet.create({
         backgroundColor : "#fff",
         shadowOpacity: 0.1,
         shadowRadius : 10,
-        elevation : 3,
-        marginTop : WScale(10),
+        elevation : 8,
+        marginTop : WScale(5),
+        marginBottom : WScale(12),
         
         justifyContent : 'flex-start',
         alignItems : 'center',

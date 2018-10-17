@@ -1,6 +1,12 @@
 import { CreatingTeam, TeamCreationSuccess, TeamCreationFailure, InvitingMembers, InvitingMembersSuccess, InvitingMembersFailure, InvitingSingleMember, InvitingSigleMemberSuccess, InvitingSingleMemberFailure, GettingTeamsList, TeamListFetchSuccess, TeamListFetchFailure } from '../../Components/Common/Constants';
 import ClientLayer from '../../Components/Layers/ClientLayer'
 
+export const initialize = () => {
+    return (dispatch) =>{
+        // set every thing to null
+        dispatch(teamCreationResponse(false,null,null))
+    }
+}    
 export const createTeam = (teamData) => {
     return (dispatch) => {
         dispatch(creatingTeam(true))

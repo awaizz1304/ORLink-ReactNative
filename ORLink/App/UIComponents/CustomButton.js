@@ -1,6 +1,6 @@
 
 import React , {Component} from 'react'
-import {StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback,Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity,ActivityIndicator,TouchableWithoutFeedback,Image,KeyboardAvoidingView} from 'react-native';
 import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 
 
@@ -23,7 +23,6 @@ const CustomButton = ({ text, action, type, width, height, style, textStyle }) =
                 <View style = {styles.shadoView}>
                 <Image style = {styles.shadowImage} source = {require('../assets/Common/ButtonShadow/rectangle2Copy2.png')} />
                 </View>
-                
             </TouchableOpacity>
         )
     }

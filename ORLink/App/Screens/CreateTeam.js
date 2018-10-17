@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback,KeyboardAvoidingView} from 'react-native';
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 import StepsCountComponent from '../UIComponents/StepsCountComponent';
 import TextInput from 'react-native-material-textinput'
@@ -11,7 +11,7 @@ import CustomPopup, { PopupType } from '../UIComponents/CustomPopup';
 import { validateTeamName } from '../Components/Utilities/Validator';
 import TopComponent from '../UIComponents/TopComponent'
 import { connect } from "react-redux";
-import {createTeam} from '../Store/Actions/TeamActions'
+import {createTeam, initialize} from '../Store/Actions/TeamActions'
 
 const Dimensions = require('Dimensions');
 const window = Dimensions.get('window');
@@ -23,15 +23,21 @@ class CreateTeam extends Component {
         this.state = {
             nameText : "",
             invalidNameText : "",
+            showIntroBar : true,
         }
     }
     componentDidMount () {
-
+        this.props.onInitialize()
+        const showIntroBar = this.props.navigation.getParam('introBar')
+        this.setState({showIntroBar : showIntroBar})
     }
     componentDidUpdate () {
+        
         if(this.props.data != null){
             this.props.navigation.navigate('InviteMemberScreen',{
                 data : this.props.data,
+                returnFunction : this.OnReturn.bind(this),
+                introBar : this.state.showIntroBar
             })
         }
     }
@@ -62,6 +68,9 @@ class CreateTeam extends Component {
     OnPressBack = () => {
         this.props.navigation.goBack()
     }
+    OnReturn  () {
+        this.props.onInitialize()
+    }
     render () {
         return (
             <TouchableWithoutFeedback>
@@ -75,11 +84,11 @@ class CreateTeam extends Component {
                     rightButtonAction = {null}
                 />
                 </View>
-                <View style = {styles.upperMiddleContainer}>
-                    <StepsCountComponent count = "1" textFirstLine = "What you want to" textSecondLine = "call your team?"/>
-                </View>
-                <View style = {styles.lowerMiddleContainer}>
-                <View style = {styles.textContainer}>
+                {this.state.showIntroBar ? <View style = {styles.upperMiddleContainer}>
+                <StepsCountComponent count = "1" textFirstLine = "What you want to" textSecondLine = "call your team?"/>
+                </View> : null }
+                <View style = {this.state.showIntroBar ? styles.lowerMiddleContainer : styles.lowerMiddleContainerExtended}>
+                <KeyboardAvoidingView style = {styles.textContainer} behavior = "height">
                     <TextInput
                         label='Team Name'
                         labelColor="#a6a6a6"
@@ -95,9 +104,9 @@ class CreateTeam extends Component {
                         ref = {(input) => this.teamName = input}
                     />
                     <Text style = {styles.invalidTextStyle}>{this.state.invalidNameText}</Text>
+                </KeyboardAvoidingView>
                 </View>
-                </View>
-                <View style = {styles.bottomContainer}>
+                <View style = {styles.bottomContainer} behavior = "height">
                     <CustomButton 
                         type = {ButtonType.BigBlueButton} 
                         text = "Next" 
@@ -123,7 +132,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCreateTeam : (teamData) =>
-            dispatch(createTeam(teamData))
+            dispatch(createTeam(teamData)),
+        onInitialize : () =>
+            dispatch(initialize())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(CreateTeam)
@@ -175,7 +186,11 @@ const styles = StyleSheet.create({
     },
     lowerMiddleContainer : {
         flex : 0.63,
-        
+        justifyContent : "center",
+        alignItems : "center"
+    },
+    lowerMiddleContainerExtended : {
+        flex : 0.78,
         justifyContent : "center",
         alignItems : "center"
     },
