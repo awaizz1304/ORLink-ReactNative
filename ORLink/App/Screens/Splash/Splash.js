@@ -30,7 +30,6 @@ class Splash extends Component
     componentDidMount()
     {
         ClientLayer.getInstance().getDataManager().GetValueForKey(APP_DATA,app_data => {
-
             // Dispatching app resume trigger.
             this.props.onResume(app_data)
 
