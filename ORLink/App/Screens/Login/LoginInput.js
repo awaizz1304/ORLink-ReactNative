@@ -9,9 +9,9 @@ import { WScale, HScale } from '../../Modules/Multi-Resolution/MultiResolution'
 
 // Importing custom components
 import { Checkbox } from '../../UIComponents/Checkbox'
+import Textinput from '../../UIComponents/Material-Input/Input'
 
 // Third Parties Dependencies.
-import Textinput from 'react-native-material-textinput'
 import PasswordInputText from 'react-native-hide-show-password-input';
 import CustomButton, { ButtonType } from '../../UIComponents/CustomButton'
 

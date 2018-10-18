@@ -7,12 +7,12 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'rea
 
 // Importing sub-components
 import Checkbox from './AgreementCheckBox'
+import Textinput from '../../UIComponents/Material-Input/Input'
 
 // Importing Custom Modules
 import { WScale, HScale } from '../../Modules/Multi-Resolution/MultiResolution'
 
 // Third Parties Dependencies.
-import Textinput from 'react-native-material-textinput'
 import { Dropdown } from 'react-native-material-dropdown'
 import PasswordInputText from 'react-native-hide-show-password-input'
 import CustomButton, { ButtonType } from '../../UIComponents/CustomButton'
