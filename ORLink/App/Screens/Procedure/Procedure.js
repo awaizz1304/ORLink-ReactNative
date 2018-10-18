@@ -5,7 +5,7 @@
 
 // Importing React Core Components
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView,FlatList } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, FlatList } from 'react-native'
 
 // Importing Sub Components
 import Title from './Sub Components/Title'
@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 // Importing Custom Components
 import { WScale, HScale } from '../../Modules/Multi-Resolution/MultiResolution'
+import Indexing from '../../UIComponents/AlphabeticalIndexing'
 
 // Core Class Component Implementation
 class Procedure extends Component {
@@ -59,7 +60,7 @@ class Procedure extends Component {
 
                             {/* <ProcedureItem /> */}
                             <FlatList
-                                data={[{key:"1"},{key:"2"},{key:"3"},{key:"4"}]}
+                                data={[{ key: "1" }, { key: "2" }, { key: "3" }, { key: "4" }]}
                                 renderItem={ProcedureItem}
                             />
 
@@ -70,6 +71,9 @@ class Procedure extends Component {
                     {/* Contains Procedure Indexing */}
                     <View style={styles.indexingContainer}>
 
+                        <Indexing
+                            sortElement={['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']}
+                        />
 
                     </View>
 
