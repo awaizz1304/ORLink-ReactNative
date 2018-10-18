@@ -11,12 +11,21 @@ import Item from './Sub Components/Item'
 
 class index extends PureComponent {
 
+    indexClicked= (index) => 
+    {
+        
+    }
+
     render() {
+
         return (
             <View style={styles.container}>
 
                 {/* Rendering # */}
                 <Item label="#"/>
+
+                {/* Rendering Elements */}
+                {this.props.idexingElements.map((item,key) => <Item key={key} label={item} onClick={this.indexClicked}/>)}
 
             </View>
         )

@@ -2,7 +2,7 @@ import React , {Component} from 'react'
 import {Modal, Platform, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback,KeyboardAvoidingView} from 'react-native';
 import CustomButton, { ButtonType } from '../UIComponents/CustomButton';
 import StepsCountComponent from '../UIComponents/StepsCountComponent';
-import Textinput from '../UIComponents/Material-Input/Input'
+import TextInput from '../UIComponents/Material-Input/Input'
 import { WScale,HScale } from '../Modules/Multi-Resolution/MultiResolution'
 import TeamDataModel from '../Components/Services/DataService/DataModels/TeamDataModel';
 import FloatingLabelInput from '../UIComponents/FloatingInput';

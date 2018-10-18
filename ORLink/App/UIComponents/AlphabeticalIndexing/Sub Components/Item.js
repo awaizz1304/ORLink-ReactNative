@@ -13,7 +13,7 @@ import { WScale, HScale } from '../../../Modules/Multi-Resolution/MultiResolutio
 // Concrete implementation
 const Item = (props) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => props.onClick(props.label)}>
             <Text style={
                 {
                     flex: 1,

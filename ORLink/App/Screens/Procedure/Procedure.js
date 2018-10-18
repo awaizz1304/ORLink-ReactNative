@@ -72,7 +72,7 @@ class Procedure extends Component {
                     <View style={styles.indexingContainer}>
 
                         <Indexing
-                            sortElement={['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']}
+                            idexingElements={['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']}
                         />
 
                     </View>
@@ -99,8 +99,7 @@ const styles = StyleSheet.create({
     mainContentContainer:
     {
         flex: 1,
-        flexDirection: "row",
-        backgroundColor: "red"
+        flexDirection: "row"
     },
     procedureContainer:
     {
@@ -112,7 +111,8 @@ const styles = StyleSheet.create({
     indexingContainer:
     {
         flex: 0.03,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        marginBottom: WScale(39.5 * 2)
     },
     addNewProcedure:
     {
